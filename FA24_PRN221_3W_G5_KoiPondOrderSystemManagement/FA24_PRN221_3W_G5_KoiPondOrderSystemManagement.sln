@@ -3,15 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35201.131
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FA24_PRN221_3W_G5_KoiPondOrderSystemManagement", "FA24_PRN221_3W_G5_KoiPondOrderSystemManagement.csproj", "{956A001A-1F44-4062-B6B1-30D1768BC140}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FA24_PRN221_3W_G5_KoiPondOrderSystemManagement", "FA24_PRN221_3W_G5_KoiPondOrderSystemManagement.csproj", "{956A001A-1F44-4062-B6B1-30D1768BC140}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessObjects", "..\BusinessObjects\BusinessObjects.csproj", "{2782AF13-830E-4DFB-952F-987B9CCE0078}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "..\Repository\Repository.csproj", "{49F07869-F48B-4D06-80FA-7156CFE58A22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAOs", "..\DAOs\DAOs.csproj", "{AF7865CD-9DA6-478C-8CD2-4257B85CDC41}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "..\Repository\Repository.csproj", "{49F07869-F48B-4D06-80FA-7156CFE58A22}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "..\Service\Service.csproj", "{19E15E9F-E1C7-462C-82F2-C7BB610859DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "..\Service\Service.csproj", "{19E15E9F-E1C7-462C-82F2-C7BB610859DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,14 +19,6 @@ Global
 		{956A001A-1F44-4062-B6B1-30D1768BC140}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{956A001A-1F44-4062-B6B1-30D1768BC140}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{956A001A-1F44-4062-B6B1-30D1768BC140}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2782AF13-830E-4DFB-952F-987B9CCE0078}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2782AF13-830E-4DFB-952F-987B9CCE0078}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2782AF13-830E-4DFB-952F-987B9CCE0078}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2782AF13-830E-4DFB-952F-987B9CCE0078}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AF7865CD-9DA6-478C-8CD2-4257B85CDC41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AF7865CD-9DA6-478C-8CD2-4257B85CDC41}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AF7865CD-9DA6-478C-8CD2-4257B85CDC41}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AF7865CD-9DA6-478C-8CD2-4257B85CDC41}.Release|Any CPU.Build.0 = Release|Any CPU
 		{49F07869-F48B-4D06-80FA-7156CFE58A22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{49F07869-F48B-4D06-80FA-7156CFE58A22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49F07869-F48B-4D06-80FA-7156CFE58A22}.Release|Any CPU.ActiveCfg = Release|Any CPU
