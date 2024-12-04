@@ -1,3 +1,6 @@
+using KoiPondOrderSystemManagement.Repositories;
+using KoiPondOrderSystemManagement.Services;
+
 namespace KoiPondOrder.RazorWebApp
 {
     public class Program
@@ -8,6 +11,9 @@ namespace KoiPondOrder.RazorWebApp
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+
+            builder.Services.AddScoped<PromotionRepository>();
+            builder.Services.AddScoped<PromotionService>();
 
             var app = builder.Build();
 
