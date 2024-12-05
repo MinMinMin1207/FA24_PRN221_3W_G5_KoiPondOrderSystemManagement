@@ -1,0 +1,100 @@
+﻿@page
+@model KoiPondOrderSystemManagement.RazorWebApp.Pages.UserManage.EditModel
+
+@{
+    ViewData["Title"] = "Edit User";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white text-center py-4">
+                    <h3 class="mb-0">Edit User Information</h3>
+                </div>
+                <div class="card-body p-4">
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="UserUpdate.UserId" />
+
+                        <!-- Full Name -->
+                        <div class="form-group mb-3">
+                            <label asp-for="UserUpdate.FullName" class="form-label"></label>
+                            <input asp-for="UserUpdate.FullName" class="form-control" placeholder="Enter full name" />
+                            <span asp-validation-for="UserUpdate.FullName" class="text-danger"></span>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-group mb-3">
+                            <label asp-for="UserUpdate.Email" class="form-label"></label>
+                            <input asp-for="UserUpdate.Email" class="form-control" placeholder="Enter email address" />
+                            <span asp-validation-for="UserUpdate.Email" class="text-danger"></span>
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div class="form-group mb-3">
+                            <label asp-for="UserUpdate.PhoneNumber" class="form-label"></label>
+                            <input asp-for="UserUpdate.PhoneNumber" class="form-control" placeholder="Enter phone number" />
+                            <span asp-validation-for="UserUpdate.PhoneNumber" class="text-danger"></span>
+                        </div>
+
+                        <!-- Address -->
+                        <div class="form-group mb-3">
+                            <label asp-for="UserUpdate.Address" class="form-label"></label>
+                            <input asp-for="UserUpdate.Address" class="form-control" placeholder="Enter address" />
+                            <span asp-validation-for="UserUpdate.Address" class="text-danger"></span>
+                        </div>
+
+                        <!-- Role -->
+                        <div class="form-group mb-3">
+                            <label asp-for="UserUpdate.Role" class="form-label"></label>
+                            <select asp-for="UserUpdate.Role" class="form-control" asp-items="ViewBag.AccountRole"></select>
+                            <span asp-validation-for="UserUpdate.Role" class="text-danger"></span>
+                        </div>
+
+                        <!-- Date of Birth -->
+                        <div class="form-group mb-3">
+                            <label asp-for="UserUpdate.DateOfBirth" class="form-label"></label>
+                            <input asp-for="UserUpdate.DateOfBirth" class="form-control" placeholder="Select date of birth" type="date" />
+                            <span asp-validation-for="UserUpdate.DateOfBirth" class="text-danger"></span>
+                        </div>
+
+                        <!-- Gender -->
+                        <div class="form-group mb-3">
+                            <label asp-for="UserUpdate.Gender" class="form-label"></label>
+                            <select asp-for="UserUpdate.Gender" class="form-control" asp-items="ViewBag.AccountGender"></select>
+                            <span asp-validation-for="UserUpdate.Gender" class="text-danger"></span>
+                        </div>
+
+                        <!-- Status (Checkbox) -->
+                        <div class="form-group form-check mb-3">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="UserUpdate.Status" /> @Html.DisplayNameFor(model => model.UserUpdate.Status)
+                            </label>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4 text-center">
+        <a asp-page="./Index" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back to List
+        </a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+}

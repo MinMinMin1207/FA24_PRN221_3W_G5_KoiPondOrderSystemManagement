@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace KoiPondOrder.Repositories.Models;
 
@@ -21,6 +22,7 @@ public partial class User
 
     public DateOnly? DateOfBirth { get; set; }
 
+    [Required]
     public string? Gender { get; set; }
 
     public bool Status { get; set; }

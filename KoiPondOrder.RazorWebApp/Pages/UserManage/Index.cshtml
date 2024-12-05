@@ -1,0 +1,95 @@
+﻿@page
+@model KoiPondOrderSystemManagement.RazorWebApp.Pages.UserManage.IndexModel
+
+@{
+    ViewData["Title"] = "User Management";
+}
+
+<h1 class="mb-4">User Management</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-primary mb-3">Create New User</a>
+</p>
+
+<p>
+    <form method="get">
+        <div class="form-group">
+            <label asp-for="SearchModel.FullName"></label>
+            <input asp-for="SearchModel.FullName" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="SearchModel.Email"></label>
+            <input asp-for="SearchModel.Email" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="SearchModel.Address"></label>
+            <input asp-for="SearchModel.Address" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</p>
+
+<div class="table-responsive">
+    <table class="table table-hover table-bordered align-middle">
+        <thead class="table-dark text-center">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.User[0].FullName)</th>
+                <th>@Html.DisplayNameFor(model => model.User[0].Email)</th>
+                <th>@Html.DisplayNameFor(model => model.User[0].PhoneNumber)</th>
+                <th>@Html.DisplayNameFor(model => model.User[0].Address)</th>
+                <th>@Html.DisplayNameFor(model => model.User[0].Role)</th>
+                <th>@Html.DisplayNameFor(model => model.User[0].DateOfBirth)</th>
+                <th>@Html.DisplayNameFor(model => model.User[0].Gender)</th>
+                <th>@Html.DisplayNameFor(model => model.User[0].Status)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.User)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.FullName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                    <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Role)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DateOfBirth)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Gender)</td>
+                    <td>
+                        <span class="badge @(item.Status ? "bg-success" : "bg-secondary")">
+                            @(item.Status ? "Active" : "Inactive")
+                        </span>
+                    </td>
+                    <td class="text-center">
+                        <a asp-page="./Edit" asp-route-id="@item.UserId" class="btn btn-sm btn-warning">Edit</a>
+                        <a asp-page="./Details" asp-route-id="@item.UserId" class="btn btn-sm btn-info">Details</a>
+                        <a asp-page="./Delete" asp-route-id="@item.UserId" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@{
+    var prevDisabled = !Model.User.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.User.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-pageIndex="@(Model.User.PageIndex - 1)"
+   asp-route-SearchModel.FullName="@Model.SearchModel.FullName"
+   asp-route-SearchModel.Email="@Model.SearchModel.Email"
+   asp-route-SearchModel.Address="@Model.SearchModel.Address"
+   asp-route-pageIndex="@(Model.User.PageIndex - 1)"
+   class="btn btn-primary @prevDisabled">
+    Previous
+</a>
+<a asp-page="./Index"
+   asp-route-pageIndex="@(Model.User.PageIndex + 1)"
+   asp-route-SearchModel.FullName="@Model.SearchModel.FullName"
+   asp-route-SearchModel.Email="@Model.SearchModel.Email"
+   asp-route-SearchModel.Address="@Model.SearchModel.Address"
+   class="btn btn-primary @nextDisabled">
+    Next
+</a>
