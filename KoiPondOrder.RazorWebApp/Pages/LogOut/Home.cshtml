@@ -1,0 +1,21 @@
+﻿@page
+@model KoiPondOrderSystemManagement.RazorWebApp.Pages.LogOut.HomeModel
+@{
+    ViewData["Title"] = "Welcome Page";
+}
+
+<div class="container text-center mt-5">
+    <div class="card shadow-lg" style="background-color: #FFC100; border-radius: 20px;">
+        <div class="card-header" style="background-color: #FF8A08; color: white; border-top-left-radius: 20px; border-top-right-radius: 20px;">
+            <h1>Welcome, @Model.UserFullName!</h1>
+        </div>
+        <div class="card-body">
+            <p style="font-size: 1.5rem; color: #C40C0C;">
+                We’re delighted to have you here. Explore our system and enjoy the best experience.
+            </p>
+            <p style="font-size: 1.2rem; color: #555;">
+                If you need assistance, feel free to <a style="color: #FF6500; text-decoration: underline;">contact us</a>.
+            </p>
+        </div>
+    </div>
+</div>

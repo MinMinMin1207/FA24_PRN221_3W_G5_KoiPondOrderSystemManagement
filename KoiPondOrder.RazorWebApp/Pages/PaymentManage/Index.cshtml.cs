@@ -69,6 +69,7 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.PaymentManage
             var listPayment = new List<Payment>();
 
             listPayment = _paymentService.Search(PaymentMethod, FromDate, ToDate, PaymentStatus);
+            listPayment = listPayment.OrderByDescending(x => x.PaymentDate).ToList();
 
             Payments = Pagination<Payment>.Create(listPayment, pageIndex ?? 1, pageSize: 5);
             return Page();

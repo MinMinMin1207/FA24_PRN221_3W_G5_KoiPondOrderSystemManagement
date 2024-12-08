@@ -23,6 +23,17 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.LoginPage
             SessionHelper.SetObjectAsJson(HttpContext.Session, "LoginAccount", loginAccount);
         }
 
+        public IActionResult OnGetAsync()
+        {
+            var loginAccount = SessionHelper.GetLoginAccount(HttpContext.Session, "LoginAccount");
+
+            if (loginAccount != null)
+            {
+                return RedirectToPage("/LogOut/Home");
+            }
+            return Page();
+        }
+
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -34,7 +45,7 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.LoginPage
             if (logged != null)
             {
                 SetSession(logged);
-                return RedirectToPage("/UserManage/Index");
+                return RedirectToPage("/LogOut/Home");
             }
             return Page();
         }
