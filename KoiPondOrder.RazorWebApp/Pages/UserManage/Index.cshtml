@@ -5,33 +5,41 @@
     ViewData["Title"] = "User Management";
 }
 
-<h1 class="mb-4" style="color: #C40C0C;">User Management</h1>
+<h1 class="mb-4 text-center" style="color: #FF6500;">User Management</h1>
 
 <p>
-    <a asp-page="Create" class="btn" style="background-color: #FF6500; color: white;">Create New User</a>
+    <a asp-page="Create" class="btn" style="background-color: #FF8A08; color: white; margin-bottom: 1rem;">Create New User</a>
 </p>
 
-<p>
-    <form method="get">
-        <div class="form-group">
-            <label asp-for="SearchModel.FullName" style="color: #FF8A08;"></label>
-            <input asp-for="SearchModel.FullName" class="form-control" />
-        </div>
-        <div class="form-group">
-            <label asp-for="SearchModel.Email" style="color: #FF8A08;"></label>
-            <input asp-for="SearchModel.Email" class="form-control" />
-        </div>
-        <div class="form-group">
-            <label asp-for="SearchModel.Address" style="color: #FF8A08;"></label>
-            <input asp-for="SearchModel.Address" class="form-control" />
-        </div>
-        <button type="submit" class="btn" style="background-color: #FF6500; color: white;">Search</button>
-    </form>
-</p>
+<div class="card mb-4">
+    <div class="card-header" style="background-color: #FFC100;">
+        <h4 style="color: #C40C0C;">Search Filters</h4>
+    </div>
+    <div class="card-body">
+        <form method="get" class="row g-3">
+            <div class="col-md-4">
+                <label asp-for="SearchModel.FullName" class="form-label">Full Name</label>
+                <input asp-for="SearchModel.FullName" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label asp-for="SearchModel.Email" class="form-label">Email</label>
+                <input asp-for="SearchModel.Email" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label asp-for="SearchModel.Address" class="form-label">Address</label>
+                <input asp-for="SearchModel.Address" class="form-control" />
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn" style="background-color: #FF8A08; color: white;">Search</button>
+                <a asp-page="./Index" class="btn" style="background-color: #FFC100; color: white;">Reset</a>
+            </div>
+        </form>
+    </div>
+</div>
 
 <div class="table-responsive">
-    <table class="table table-hover table-bordered align-middle">
-        <thead class="table-dark text-center" style="background-color: #FFC100; color: white;">
+    <table class="table table-striped table-bordered align-middle">
+        <thead style="background-color: #C40C0C; color: white;">
             <tr>
                 <th>@Html.DisplayNameFor(model => model.User[0].FullName)</th>
                 <th>@Html.DisplayNameFor(model => model.User[0].Email)</th>
@@ -41,54 +49,65 @@
                 <th>@Html.DisplayNameFor(model => model.User[0].DateOfBirth)</th>
                 <th>@Html.DisplayNameFor(model => model.User[0].Gender)</th>
                 <th>@Html.DisplayNameFor(model => model.User[0].Status)</th>
-                <th>Actions</th>
+                <th style="min-width: 150px;">Actions</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.User)
+            @if (!Model.User.Any())
             {
                 <tr>
-                    <td>@Html.DisplayFor(modelItem => item.FullName)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
-                    <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Address)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Role)</td>
-                    <td>@Html.DisplayFor(modelItem => item.DateOfBirth)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Gender)</td>
-                    <td>
-                        <span class="badge @(item.Status ? "bg-success" : "bg-secondary")">
-                            @(item.Status ? "Active" : "Inactive")
-                        </span>
-                    </td>
-                    <td class="text-center">
-                        <a asp-page="./Edit" asp-route-id="@item.UserId" class="btn btn-sm" style="background-color: #FF8A08; color: white;">Edit</a>
-                        <a asp-page="./Details" asp-route-id="@item.UserId" class="btn btn-sm" style="background-color: #FFC100; color: white;">Details</a>
-                        <a asp-page="./Delete" asp-route-id="@item.UserId" class="btn btn-sm" style="background-color: #C40C0C; color: white;">Delete</a>
-                    </td>
+                    <td colspan="9" class="text-center">No users found.</td>
                 </tr>
+            }
+            else
+            {
+                @foreach (var item in Model.User)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.FullName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Role)</td>
+                        <td>@Html.DisplayFor(modelItem => item.DateOfBirth)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Gender)</td>
+                        <td>
+                            <span class="badge @(item.Status ? "bg-success" : "bg-secondary")">
+                                @(item.Status ? "Active" : "Inactive")
+                            </span>
+                        </td>
+                        <td>
+                            <a asp-page="./Edit" asp-route-id="@item.UserId" class="btn btn-sm" style="background-color: #FF8A08; color: white;">Edit</a>
+                            <a asp-page="./Details" asp-route-id="@item.UserId" class="btn btn-sm" style="background-color: #FFC100; color: white;">Details</a>
+                            <a asp-page="./Delete" asp-route-id="@item.UserId" class="btn btn-sm" style="background-color: #C40C0C; color: white;">Delete</a>
+                        </td>
+                    </tr>
+                }
             }
         </tbody>
     </table>
 </div>
 
-@{
-    var prevDisabled = !Model.User.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !Model.User.HasNextPage ? "disabled" : "";
-}
+<div class="d-flex justify-content-between mt-4">
+    <a asp-page="./Index"
+       asp-route-pageIndex="@(Model.User.PageIndex - 1)"
+       asp-route-SearchModel.FullName="@Model.SearchModel.FullName"
+       asp-route-SearchModel.Email="@Model.SearchModel.Email"
+       asp-route-SearchModel.Address="@Model.SearchModel.Address"
+       class="btn @(Model.User.HasPreviousPage ? "" : "disabled")"
+       style="background-color: #FF6500; color: white;">
+        Previous
+    </a>
 
-<a asp-page="./Index"
-   asp-route-pageIndex="@(Model.User.PageIndex - 1)"
-   asp-route-SearchModel.FullName="@Model.SearchModel.FullName"
-   asp-route-SearchModel.Email="@Model.SearchModel.Email"
-   asp-route-SearchModel.Address="@Model.SearchModel.Address"
-   class="btn" style="background-color: #FF6500; color: white; @prevDisabled">
-    Previous
-</a>
-<a asp-page="./Index"
-   asp-route-pageIndex="@(Model.User.PageIndex + 1)"
-   asp-route-SearchModel.FullName="@Model.SearchModel.FullName"
-   asp-route-SearchModel.Email="@Model.SearchModel.Email"
-   asp-route-SearchModel.Address="@Model.SearchModel.Address"
-   class="btn" style="background-color: #FF6500; color: white; @nextDisabled">
-    Next
-</a>
+    <a asp-page="./Index"
+       asp-route-pageIndex="@(Model.User.PageIndex + 1)"
+       asp-route-SearchModel.FullName="@Model.SearchModel.FullName"
+       asp-route-SearchModel.Email="@Model.SearchModel.Email"
+       asp-route-SearchModel.Address="@Model.SearchModel.Address"
+       class="btn @(Model.User.HasNextPage ? "" : "disabled")"
+       style="background-color: #FF6500; color: white;">
+        Next
+    </a>
+
+
+</div>

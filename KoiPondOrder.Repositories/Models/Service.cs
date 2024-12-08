@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace KoiPondOrder.Repositories.Models;
+namespace KoiPondOrderSystemManagement.Repositories.Models;
 
 public partial class Service
 {

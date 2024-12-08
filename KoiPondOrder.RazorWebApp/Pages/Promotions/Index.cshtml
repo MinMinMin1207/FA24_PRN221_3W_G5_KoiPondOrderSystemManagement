@@ -1,0 +1,112 @@
+﻿@page
+@model KoiPondOrderSystemManagement.RazorWebApp.Pages.Promotions.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+@if (TempData["Message"] != null)
+{
+        <h2 class="text-info">@TempData["Message"]</h2>
+}
+
+<p>
+    <a asp-page="Create" class="btn btn-success">Create New</a>
+</p>
+
+<!-- Search Form -->
+<form method="get" class="mb-4">
+    <div class="row align-items-center">
+        <div class="col-md-4">
+            <input type="text" id="searchTerm" name="searchTerm" value="@Model.SearchTerm" placeholder="Search by Name" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <input type="number" id="pointsRequired" name="pointsRequired" value="@Model.PointsRequired" placeholder="Points Required" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <input type="number" id="discountPercentage" name="discountPercentage" step="0.01" value="@Model.DiscountPercentage" placeholder="Discount (%)" class="form-control" />
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">Search</button>
+        </div>
+    </div>
+</form>
+
+<!-- Promotions Table -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Promotion[0].PromotionName)</th>
+            <th>@Html.DisplayNameFor(model => model.Promotion[0].DiscountPercentage)</th>
+            <th>@Html.DisplayNameFor(model => model.Promotion[0].StartDate)</th>
+            <th>@Html.DisplayNameFor(model => model.Promotion[0].EndDate)</th>
+            <th>@Html.DisplayNameFor(model => model.Promotion[0].PointsRequired)</th>
+            <th>@Html.DisplayNameFor(model => model.Promotion[0].MaxUsage)</th>
+            <th>@Html.DisplayNameFor(model => model.Promotion[0].MinOrderValue)</th>
+            <th>@Html.DisplayNameFor(model => model.Promotion[0].PromotionStatus)</th>
+            <th>@Html.DisplayNameFor(model => model.Promotion[0].RemainUsage)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Promotion)
+        {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.PromotionName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.DiscountPercentage)</td>
+                        <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+                        <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PointsRequired)</td>
+                        <td>@Html.DisplayFor(modelItem => item.MaxUsage)</td>
+                        <td>@Html.DisplayFor(modelItem => item.MinOrderValue)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PromotionStatus)</td>
+                        <td>@Html.DisplayFor(modelItem => item.RemainUsage)</td>
+                        <td>
+                            <a asp-page="./Edit" asp-route-id="@item.PromotionId">Edit</a> |
+                            <a asp-page="./Details" asp-route-id="@item.PromotionId">Details</a> |
+                            <a asp-page="./Delete" asp-route-id="@item.PromotionId">Delete</a>
+                        </td>
+                    </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Pagination -->
+<!-- Pagination -->
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        <!-- Previous Page -->
+        <li class="page-item @(Model.PageIndex == 1 ? "disabled" : "")">
+            <a class="page-link" href="@Url.Action("Index", new { pageIndex = Model.PageIndex - 1, searchTerm = Model.SearchTerm, pointsRequired = Model.PointsRequired, discountPercentage = Model.DiscountPercentage })" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+
+        <!-- First Page -->
+        <li class="page-item @(Model.PageIndex == 1 ? "disabled" : "")">
+            <a class="page-link" href="@Url.Action("Index", new { pageIndex = 1, searchTerm = Model.SearchTerm, pointsRequired = Model.PointsRequired, discountPercentage = Model.DiscountPercentage })">First</a>
+        </li>
+
+        <!-- Page Number Links -->
+        @for (var i = 1; i <= Model.TotalPages; i++)
+        {
+                <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { pageIndex = i, searchTerm = Model.SearchTerm, pointsRequired = Model.PointsRequired, discountPercentage = Model.DiscountPercentage })">@i</a>
+                </li>
+        }
+
+        <!-- Last Page -->
+        <li class="page-item @(Model.PageIndex == Model.TotalPages ? "disabled" : "")">
+            <a class="page-link" href="@Url.Action("Index", new { pageIndex = Model.TotalPages, searchTerm = Model.SearchTerm, pointsRequired = Model.PointsRequired, discountPercentage = Model.DiscountPercentage })">Last</a>
+        </li>
+
+        <!-- Next Page -->
+        <li class="page-item @(Model.PageIndex == Model.TotalPages ? "disabled" : "")">
+            <a class="page-link" href="@Url.Action("Index", new { pageIndex = Model.PageIndex + 1, searchTerm = Model.SearchTerm, pointsRequired = Model.PointsRequired, discountPercentage = Model.DiscountPercentage })" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+

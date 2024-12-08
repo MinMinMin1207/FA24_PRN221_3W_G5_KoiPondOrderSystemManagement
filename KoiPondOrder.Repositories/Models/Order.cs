@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace KoiPondOrder.Repositories.Models;
+namespace KoiPondOrderSystemManagement.Repositories.Models;
 
 public partial class Order
 {
@@ -24,6 +24,8 @@ public partial class Order
     public string? OrderStatus { get; set; }
 
     public decimal FinalCost { get; set; }
+
+    public string? OrderDescription { get; set; }
 
     public virtual User Customer { get; set; } = null!;
 

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 using KoiPondOrderSystemManagement.Services;
-using KoiPondOrder.Repositories.Models;
+using KoiPondOrderSystemManagement.Repositories.Models;
 
 namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.PondManage
 {

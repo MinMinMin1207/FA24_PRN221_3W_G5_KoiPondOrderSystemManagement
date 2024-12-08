@@ -1,5 +1,5 @@
-﻿@using KoiPondOrder.Repositories.Models
-@using System.Text.Json
+﻿@using System.Text.Json
+@using KoiPondOrderSystemManagement.Repositories.Models
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,7 +61,7 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
+              
                 <!-- Nội dung menu -->
                 <div class="collapse navbar-collapse" id="navbarContent">
                     <!-- Danh sách menu -->
@@ -70,7 +70,10 @@
                         new { Name = "User", Page = "/UserManage/Index" },
                         new { Name = "Payment", Page = "/PaymentManage/Index" },
                         new { Name = "Pond", Page = "/PondManage/Index" },
-                        new { Name = "Services", Page = "/ServicesManage/Index" },
+                        new { Name = "Service", Page = "/ServicesManage/Index" },
+                        new { Name = "Design", Page = "/Designs/Index" },
+                        new { Name = "Promotion", Page = "/Promotions/Index" },
+                        new { Name = "Order", Page = "/OrderManage/Index" },
                         })
                         {
                             <li class="nav-item">
@@ -78,6 +81,7 @@
                                    asp-area="" asp-page="@item.Page">@item.Name</a>
                             </li>
                         }
+
                     </ul>
 
                     <!-- Phần user và Logout -->
@@ -86,11 +90,7 @@
                         {
                             var user = JsonSerializer.Deserialize<User>(userJson);
                             <span class="text-white me-3">Welcome, @user.FullName</span>
-                            <a class="btn btn-danger btn-sm" asp-area="" asp-page="/LogOut">Log Out</a>
-                        }
-                        else
-                        {
-                            <a class="btn btn-light btn-sm" asp-area="" asp-page="/Login">Login</a>
+                            <a class="btn btn-danger btn-sm" asp-area="" asp-page="/LogOut/Index">Log Out</a>
                         }
                     </div>
                 </div>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace KoiPondOrder.Repositories.Models;
+namespace KoiPondOrderSystemManagement.Repositories.Models;
 
 public partial class FA24_PRN221_3W_G5_KoiPondOrderSystemManagementContext : DbContext
 {
@@ -44,9 +44,12 @@ public partial class FA24_PRN221_3W_G5_KoiPondOrderSystemManagementContext : DbC
         string connectionString = config.GetConnectionString(connectionStringName);
         return connectionString;
     }
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer(GetConnectionString("DefaultConnection"));
+        => optionsBuilder.UseSqlServer(GetConnectionString("DefaultConnection")).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+
+//    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+//        => optionsBuilder.UseSqlServer("Server=(local); uid=sa; pwd=12345; database=FA24_PRN221_3W_G5_KoiPondOrderSystemManagement; TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -112,6 +115,7 @@ public partial class FA24_PRN221_3W_G5_KoiPondOrderSystemManagementContext : DbC
             entity.Property(e => e.DeliveryDate).HasColumnType("datetime");
             entity.Property(e => e.FinalCost).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.OrderDate).HasColumnType("datetime");
+            entity.Property(e => e.OrderDescription).HasMaxLength(500);
             entity.Property(e => e.OrderStatus).HasMaxLength(50);
             entity.Property(e => e.PaymentId).HasColumnName("PaymentID");
             entity.Property(e => e.PromotionId).HasColumnName("PromotionID");

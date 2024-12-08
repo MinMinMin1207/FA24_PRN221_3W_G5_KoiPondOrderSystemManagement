@@ -1,5 +1,5 @@
-using KoiPondOrder.Repositories.Models;
 using KoiPondOrderSystemManagement.Repositories;
+using KoiPondOrderSystemManagement.Repositories.Models;
 using KoiPondOrderSystemManagement.Services;
 
 namespace KoiPondOrder.RazorWebApp
@@ -12,6 +12,9 @@ namespace KoiPondOrder.RazorWebApp
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+            builder.Services.AddScoped<DesignService>();
+            builder.Services.AddScoped<DesignRepository>();
+
 
             builder.Services.AddSession(options =>
             {
@@ -26,8 +29,12 @@ namespace KoiPondOrder.RazorWebApp
             builder.Services.AddScoped<PondsService>();
             builder.Services.AddScoped<ServicesService>();
             builder.Services.AddScoped<UserService>();
+            builder.Services.AddScoped<OrderService>();
 
             builder.Services.AddScoped<OrderPaymentService>();
+
+            builder.Services.AddScoped<PromotionRepository>();
+            builder.Services.AddScoped<PromotionService>();
 
             var app = builder.Build();
 
