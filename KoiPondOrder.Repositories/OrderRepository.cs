@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using KoiPondOrder.Repositories.Models;
 using KoiPondOrder.Repositories;
+using KoiPondOrderSystemManagement.Repositories.Models;
 
 namespace KoiPondOrderSystemManagement.Repositories
 {

@@ -29,6 +29,7 @@ namespace KoiPondOrder.RazorWebApp
             builder.Services.AddScoped<PondsService>();
             builder.Services.AddScoped<ServicesService>();
             builder.Services.AddScoped<UserService>();
+            builder.Services.AddScoped<OrderService>();
 
             builder.Services.AddScoped<OrderPaymentService>();
 

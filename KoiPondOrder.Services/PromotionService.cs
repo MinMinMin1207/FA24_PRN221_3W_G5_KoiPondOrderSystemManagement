@@ -19,6 +19,7 @@ namespace KoiPondOrderSystemManagement.Services
         {
             _repository = new PromotionRepository();
         }
+
         public async Task<List<Promotion>> GetAll()
         {
             return await _repository.GetAllAsync();
