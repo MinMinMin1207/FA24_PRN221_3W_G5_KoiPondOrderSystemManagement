@@ -61,7 +61,7 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
+              
                 <!-- Nội dung menu -->
                 <div class="collapse navbar-collapse" id="navbarContent">
                     <!-- Danh sách menu -->
@@ -72,6 +72,7 @@
                         new { Name = "Pond", Page = "/PondManage/Index" },
                         new { Name = "Services", Page = "/ServicesManage/Index" },
                         new { Name = "Design", Page = "/Designs/Index" },
+                        new { Name = "Promotion", Page = "/Promotions/Index" },
                         })
                         {
                             <li class="nav-item">
@@ -79,6 +80,7 @@
                                    asp-area="" asp-page="@item.Page">@item.Name</a>
                             </li>
                         }
+
                     </ul>
 
                     <!-- Phần user và Logout -->

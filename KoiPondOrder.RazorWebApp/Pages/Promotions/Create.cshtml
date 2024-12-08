@@ -1,0 +1,73 @@
+﻿@page
+@model KoiPondOrderSystemManagement.RazorWebApp.Pages.Promotions.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+@if (ViewData["Message"] != null)
+{
+        <h2>@ViewData["Message"]</h2>
+}
+
+<h4>Promotion</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Promotion.PromotionName" class="control-label"></label>
+                <input asp-for="Promotion.PromotionName" class="form-control" />
+                <span asp-validation-for="Promotion.PromotionName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Promotion.DiscountPercentage" class="control-label"></label>
+                <input asp-for="Promotion.DiscountPercentage" class="form-control" />
+                <span asp-validation-for="Promotion.DiscountPercentage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Promotion.StartDate" class="control-label"></label>
+                <input asp-for="Promotion.StartDate" class="form-control" />
+                <span asp-validation-for="Promotion.StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Promotion.EndDate" class="control-label"></label>
+                <input asp-for="Promotion.EndDate" class="form-control" />
+                <span asp-validation-for="Promotion.EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Promotion.PointsRequired" class="control-label"></label>
+                <input asp-for="Promotion.PointsRequired" class="form-control" />
+                <span asp-validation-for="Promotion.PointsRequired" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Promotion.MaxUsage" class="control-label"></label>
+                <input asp-for="Promotion.MaxUsage" class="form-control" />
+                <span asp-validation-for="Promotion.MaxUsage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Promotion.MinOrderValue" class="control-label"></label>
+                <input asp-for="Promotion.MinOrderValue" class="form-control" />
+                <span asp-validation-for="Promotion.MinOrderValue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Promotion.RemainUsage" class="control-label"></label>
+                <input asp-for="Promotion.RemainUsage" class="form-control" />
+                <span asp-validation-for="Promotion.RemainUsage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

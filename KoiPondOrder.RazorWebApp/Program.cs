@@ -34,6 +34,9 @@ namespace KoiPondOrder.RazorWebApp
 
             builder.Services.AddScoped<OrderPaymentService>();
 
+            builder.Services.AddScoped<PromotionRepository>();
+            builder.Services.AddScoped<PromotionService>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

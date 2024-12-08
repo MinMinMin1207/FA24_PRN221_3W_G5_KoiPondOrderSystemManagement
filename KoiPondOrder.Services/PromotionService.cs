@@ -1,23 +1,24 @@
-﻿using KoiPondOrderSystemManagement.Repositories;
+using KoiPondOrder.Repositories.Models;
+using KoiPondOrderSystemManagement.Repositories;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using KoiPondOrderSystemManagement.Repositories.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static KoiPondOrderSystemManagement.Repositories.PromotionRepository;
+
 
 namespace KoiPondOrderSystemManagement.Services
 {
     public class PromotionService
     {
-        private PromotionRepository _repository;
+        private readonly PromotionRepository _repository;
+
         public PromotionService()
         {
-            _repository ??= new PromotionRepository();
-        }
-        public PromotionService(PromotionRepository repository)
-        {
-            _repository = repository;
+            _repository = new PromotionRepository();
         }
         public async Task<List<Promotion>> GetAll()
         {
@@ -29,7 +30,7 @@ namespace KoiPondOrderSystemManagement.Services
             return await _repository.CreateAsync(categoryBankAccount);
         }
 
-        public async Task<Promotion> GetById(string id)
+        public async Task<Promotion> GetById(int id)
         {
             return await _repository.GetByIdAsync(id);
         }
@@ -44,9 +45,14 @@ namespace KoiPondOrderSystemManagement.Services
             return await _repository.RemoveAsync(categoryBankAccount);
         }
 
-        //public List<CategoryBankAccount> Search(string bankNo, string holderName, string holderTaxCode)
-        //{
-        //    return _repository.Search(bankNo, holderName, holderTaxCode);
-        //}
+        public async Task<PromotionResponse> GetListPaging(
+string searchTerm,
+int? pointsRequired,
+decimal? discountPercentage,
+int pageIndex,
+int pageSize)
+        {
+            return await _repository.GetListPaging(searchTerm, pointsRequired, discountPercentage, pageIndex, pageSize);
+        }
     }
 }
