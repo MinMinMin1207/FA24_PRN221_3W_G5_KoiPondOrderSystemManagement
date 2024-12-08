@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace KoiPondOrderSystemManagement.RazorWebApp.Pages
 {
-    public class LogOutModel : PageModel
+    public class LogoutModel : PageModel
     {
-        public async Task<IActionResult> OnGet()
+        public IActionResult OnGet()
         {
-            HttpContext.Session.Clear();
+            HttpContext.Session.Remove("UserEmail");
             return RedirectToPage("/Login");
         }
     }

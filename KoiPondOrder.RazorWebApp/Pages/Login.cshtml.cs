@@ -3,18 +3,18 @@ using KoiPondOrderSystemManagement.Repositories.DTOs;
 using KoiPondOrderSystemManagement.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Text.Json;
 
-namespace KoiPondOrderSystemManagement.RazorWebApp.Pages
+namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.LoginPage
 {
     public class LoginModel : PageModel
     {
         private readonly UserService _userService;
-
         public LoginModel(UserService userService)
         {
             _userService = userService;
-        }
 
+        }
         [BindProperty]
         public LoginRequestModel SystemAccount { get; set; } = default!;
 

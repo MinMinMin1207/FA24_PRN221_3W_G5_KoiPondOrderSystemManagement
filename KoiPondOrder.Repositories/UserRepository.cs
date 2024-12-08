@@ -12,8 +12,16 @@ namespace KoiPondOrderSystemManagement.Repositories
 {
     public class UserRepository : GenericRepository<User>
     {
+        private static UserRepository instance = null;
         public UserRepository() { }
-
+        public static UserRepository GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new UserRepository();
+            }
+            return instance;
+        }
         public List<User> Search(UserSearchModel? model)
         {
             try
@@ -44,7 +52,22 @@ namespace KoiPondOrderSystemManagement.Repositories
                 throw new Exception(ex.Message);
             }
         }
-
+        public async Task<List<User>> GetAllCustomers()
+        {
+            return await _context.Users.Where(u => u.Role == "Customer").ToListAsync();
+        }
+        public async Task<List<User>> GetAllConsultingStaff()
+        {
+            return await _context.Users.Where(u => u.Role == "ConsultingStaff").ToListAsync();
+        }
+        public async Task<List<User>> GetAllDesignStaff()
+        {
+            return await _context.Users.Where(u => u.Role == "DesignStaff").ToListAsync();
+        }
+        public async Task<List<User>> GetAllConstructionStaff()
+        {
+            return await _context.Users.Where(u => u.Role == "ConstructionStaff").ToListAsync();
+        }
         public User? Login(LoginRequestModel model)
         {
             try
@@ -64,6 +87,7 @@ namespace KoiPondOrderSystemManagement.Repositories
                 throw new Exception(ex.Message);
             }
         }
+
 
         public async Task<bool> CheckIfExistedEmail(string email)
         {
