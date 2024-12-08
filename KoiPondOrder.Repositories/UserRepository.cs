@@ -12,8 +12,16 @@ namespace KoiPondOrderSystemManagement.Repositories
 {
     public class UserRepository : GenericRepository<User>
     {
+        private static UserRepository instance = null;
         public UserRepository() { }
-
+        public static UserRepository GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new UserRepository();
+            }
+            return instance;
+        }
         public List<User> Search(UserSearchModel? model)
         {
             try
@@ -44,20 +52,32 @@ namespace KoiPondOrderSystemManagement.Repositories
                 throw new Exception(ex.Message);
             }
         }
-
-        public User? Login(LoginRequestModel model)
+        public async Task<List<User>> GetAllCustomers()
         {
+            return await _context.Users.Where(u => u.Role == "Customer").ToListAsync();
+        }
+        public async Task<List<User>> GetAllConsultingStaff()
+        {
+            return await _context.Users.Where(u => u.Role == "ConsultingStaff").ToListAsync();
+        }
+        public async Task<List<User>> GetAllDesignStaff()
+        {
+            return await _context.Users.Where(u => u.Role == "DesignStaff").ToListAsync();
+        }
+        public async Task<List<User>> GetAllConstructionStaff()
+        {
+            return await _context.Users.Where(u => u.Role == "ConstructionStaff").ToListAsync();
+        }
+        public User Checklogin(string email, string password)
+        {
+            var u = new User();
             try
             {
-                using var _context = new FA24_PRN221_3W_G5_KoiPondOrderSystemManagementContext();
-                var result = new User();
-                var user = _context.Users.FirstOrDefault(u => u.Email.ToLower().Equals(model.Email.ToLower()));
-                if (BCrypt.Net.BCrypt.Verify(model.Password, user.PasswordHash))
+                using (var db = new FA24_PRN221_3W_G5_KoiPondOrderSystemManagementContext())
                 {
-                    result = user;
+                    u = db.Users.FirstOrDefault(x => x.Email.Equals(email) && x.PasswordHash.Equals(password));
+                    return u;
                 }
-                else result = null;
-                return result;
             }
             catch (Exception ex)
             {

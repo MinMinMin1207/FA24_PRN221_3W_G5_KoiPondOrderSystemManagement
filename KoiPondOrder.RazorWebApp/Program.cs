@@ -1,3 +1,5 @@
+using KoiPondOrder.Repositories.Models;
+using KoiPondOrderSystemManagement.Repositories;
 using KoiPondOrderSystemManagement.Services;
 
 namespace KoiPondOrder.RazorWebApp
@@ -17,9 +19,12 @@ namespace KoiPondOrder.RazorWebApp
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
-
+            builder.Services.AddScoped<FA24_PRN221_3W_G5_KoiPondOrderSystemManagementContext>();
+            builder.Services.AddScoped<PondsRepository>();
+            builder.Services.AddScoped<ServicesRepository>();
             builder.Services.AddScoped<PaymentService>();
-
+            builder.Services.AddScoped<PondsService>();
+            builder.Services.AddScoped<ServicesService>();
             builder.Services.AddScoped<UserService>();
 
             builder.Services.AddScoped<OrderPaymentService>();

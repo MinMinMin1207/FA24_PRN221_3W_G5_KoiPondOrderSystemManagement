@@ -1,0 +1,125 @@
+﻿  @page
+@model KoiPondOrderSystemManagement.RazorWebApp.Pages.PondManage.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<form method="post" asp-page-handler="Search" class="mt-3">
+    <div class="row">
+        <div class="col-md-4">
+            <input type="text" name="SearchModel.ConsultingStaff" placeholder="Consulting Staff" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <input type="text" name="SearchModel.Customer" placeholder="Customer" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <input type="text" name="SearchModel.DesignStaff" placeholder="Design Staff" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-success">Search</button>
+        </div>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Pond[0].ConstructionStaffId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pond[0].PondName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pond[0].DesignStyle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pond[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pond[0].StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pond[0].EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pond[0].TotalCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pond[0].ConsultingStaff)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pond[0].Customer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pond[0].Design)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pond[0].DesignStaff)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pond[0].Payment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pond[0].Promotion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Pond)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ConstructionStaffId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PondName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DesignStyle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalCost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ConsultingStaff.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Design.DesignName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DesignStaff.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Payment.PaymentMethod)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Promotion.PromotionName)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.PondId">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.PondId">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.PondId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
