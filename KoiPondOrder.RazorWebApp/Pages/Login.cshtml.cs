@@ -34,13 +34,11 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.LoginPage
                 var user = _userService.CheckLogin(Input.Email, Input.PasswordHash);
                 if (user != null)
                 {
-
-                    HttpContext.Session.SetString("UserEmail", user.Email);
-                    HttpContext.Session.SetString("UserRole", user.Role);
-
-                    return RedirectToPage("/Index");
-                }
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+            var logged = _userService.Login(SystemAccount);
+            if (logged != null)
+            {
+                SetSession(logged);
+                return RedirectToPage("/UserManage/Index");
             }
             return Page();
         }

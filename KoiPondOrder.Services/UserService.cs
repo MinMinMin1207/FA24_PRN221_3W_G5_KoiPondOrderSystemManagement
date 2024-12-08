@@ -65,6 +65,14 @@ namespace KoiPondOrderSystemManagement.Services
             return _userRepository.Search(model);
         }
 
-        public User CheckLogin(string email, string password) => UserRepository.GetInstance().Checklogin(email, password);
+        public User? Login(LoginRequestModel loginRequest)
+        {
+            return _userRepository.Login(loginRequest);
+        }
+
+        public async Task<bool> CheckIfExistedEmail(string email)
+        {
+            return await _userRepository.CheckIfExistedEmail(email);
+        }
     }
 }

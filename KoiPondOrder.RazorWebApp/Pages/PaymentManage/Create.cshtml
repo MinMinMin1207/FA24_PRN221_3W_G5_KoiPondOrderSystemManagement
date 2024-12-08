@@ -1,0 +1,130 @@
+﻿@page
+@model KoiPondOrderSystemManagement.RazorWebApp.Pages.PaymentManage.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1 class="text-center my-4" style="color: #FF8A08;">Create Payment</h1>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow" style="border: 1px solid #FFC100;">
+                <div class="card-header" style="background-color: #FF6500; color: white;">
+                    <h4 class="mb-0">Payment Details</h4>
+                </div>
+                <div class="card-body" style="background-color: #FFF4E5;">
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="Payment.OrderId" class="form-label" style="color: #FF6500;"></label>
+                            <select id="orderId" asp-for="Payment.OrderId" class="form-control" asp-items="ViewBag.OrderId" style="border: 1px solid #FF8A08; background-color: #FFF4E5;"></select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Payment.PaymentMethod" class="form-label" style="color: #FF6500;"></label>
+                            <select id="paymentMethod" asp-for="Payment.PaymentMethod" class="form-select" style="border: 1px solid #FF8A08; background-color: #FFF4E5;">
+                                <option value="">Select Payment method</option>
+                                <option value="BankTransfer">Bank Transfer</option>
+                                <option value="Cash">Cash</option>
+                                <option value="Card">Card</option>
+                            </select>
+                            <span asp-validation-for="Payment.PaymentMethod" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Payment.Amount" class="form-label" style="color: #FF6500;"></label>
+                            <input id="amount" asp-for="Payment.Amount" class="form-control" readonly placeholder="Amount will be populated" style="border: 1px solid #FF8A08; background-color: #FFF4E5;" />
+                            <span asp-validation-for="Payment.Amount" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Payment.Tax" class="form-label" style="color: #FF6500;"></label>
+                            <input id="tax" asp-for="Payment.Tax" class="form-control" readonly placeholder="Tax will be populated" style="border: 1px solid #FF8A08; background-color: #FFF4E5;" />
+                            <span asp-validation-for="Payment.Tax" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Payment.Discount" class="form-label" style="color: #FF6500;"></label>
+                            <input id="discount" asp-for="Payment.Discount" class="form-control" readonly placeholder="Discount will be populated" style="border: 1px solid #FF8A08; background-color: #FFF4E5;" />
+                            <span asp-validation-for="Payment.Discount" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Payment.FinalAmount" class="form-label" style="color: #FF6500;"></label>
+                            <input id="finalAmount" asp-for="Payment.FinalAmount" class="form-control" readonly placeholder="Final Amount will be populated" style="border: 1px solid #FF8A08; background-color: #FFF4E5;" />
+                            <span asp-validation-for="Payment.FinalAmount" class="text-danger"></span>
+                        </div>
+
+                        <!-- Hidden Inputs for PaymentStatus and PaymentDate -->
+                        <input type="hidden" asp-for="Payment.PaymentStatus" value="Pending" />
+                        <input type="hidden" asp-for="Payment.PaymentDate" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss")" />
+
+                        <div class="d-flex justify-content-between">
+                            <a asp-page="Index" class="btn" style="background-color: #FF6500; color: white;">Back to List</a>
+                            <input type="submit" value="Create" class="btn" style="background-color: #C40C0C; color: white;" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", async function () {
+            const orderIdDropdown = document.getElementById("orderId");
+            const amountField = document.getElementById("amount");
+            const taxField = document.getElementById("tax");
+            const discountField = document.getElementById("discount");
+            const finalAmountField = document.getElementById("finalAmount");
+
+            // Loading Spinner (optional)
+            const loadingSpinner = document.createElement('div');
+            loadingSpinner.innerHTML = 'Loading order details...';
+            loadingSpinner.id = 'loadingSpinner';
+            loadingSpinner.style.display = 'none';
+            document.body.appendChild(loadingSpinner);
+
+            async function fetchAndUpdateFields(orderId) {
+                if (orderId) {
+                    try {
+                        // Show loading spinner
+                        loadingSpinner.style.display = 'block';
+
+                        const response = await fetch(`/PaymentManage/Create?handler=OrderDetails&orderId=${orderId}`);
+                        if (response.ok) {
+                            const orderDetails = await response.json();
+                            amountField.value = orderDetails.amount ?? '';
+                            taxField.value = orderDetails.tax ?? '';
+                            discountField.value = orderDetails.discount ?? 0;
+                            finalAmountField.value = orderDetails.finalAmount ?? '';
+                        } else {
+                            console.error("Failed to fetch order details");
+                        }
+                    } catch (error) {
+                        console.error("Error fetching order details:", error);
+                    } finally {
+                        // Hide loading spinner
+                        loadingSpinner.style.display = 'none';
+                    }
+                } else {
+                    amountField.value = '';
+                    taxField.value = '';
+                    discountField.value = '';
+                    finalAmountField.value = '';
+                }
+            }
+
+            const initialOrderId = orderIdDropdown.value;
+            await fetchAndUpdateFields(initialOrderId);
+
+            orderIdDropdown.addEventListener("change", function () {
+                fetchAndUpdateFields(this.value);
+            });
+        });
+    </script>
+}

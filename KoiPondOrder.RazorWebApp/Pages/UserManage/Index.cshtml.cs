@@ -33,6 +33,10 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.UserManage
             {
                 return Redirect("/Login");
             }
+            if (loginAccount.Role.Equals("Customer"))
+            {
+                return StatusCode(403);
+            }
 
             var listUser = new List<User>();
 

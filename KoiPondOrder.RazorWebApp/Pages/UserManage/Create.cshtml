@@ -13,7 +13,7 @@
 
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-8">
-            <form method="post" class="p-4 border rounded-3 bg-light shadow-sm">
+            <form method="post" class="p-4 border rounded-3 custom-form shadow-sm">
                 <div asp-validation-summary="ModelOnly" class="alert alert-danger d-none"></div>
 
                 <!-- Full Name -->
@@ -86,18 +86,48 @@
 
                 <!-- Submit Button -->
                 <div class="d-grid mt-4">
-                    <button type="submit" class="btn btn-dark btn-lg rounded-2">Create User</button>
+                    <button type="submit" class="btn custom-btn btn-lg rounded-2">Create User</button>
                 </div>
             </form>
 
             <div class="text-center mt-3">
-                <a asp-page="Index" class="btn btn-outline-dark btn-sm rounded-2">
+                <a asp-page="Index" class="btn btn-outline-secondary btn-sm rounded-2">
                     <i class="fas fa-arrow-left"></i> Back to List
                 </a>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Custom Styles -->
+<style>
+    /* Form Background */
+    .custom-form {
+        background-color: #FFFAF0; /* Màu nền dịu mắt */
+    }
+
+    /* Button Styles */
+    .custom-btn {
+        background-color: #FF6500; /* Cam nhạt */
+        color: white;
+        border: none;
+        font-size: 1rem;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+        .custom-btn:hover {
+            background-color: #FF8A08; /* Cam đậm hơn */
+            transform: scale(1.02);
+        }
+
+    /* Input Focus Styles */
+    .form-control:focus {
+        border-color: #FFC100; /* Màu cam dịu khi focus */
+        box-shadow: 0 0 4px #FFC100;
+        outline: none;
+    }
+</style>
+
 
 @section Scripts {
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>

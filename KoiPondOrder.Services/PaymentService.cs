@@ -41,5 +41,10 @@ namespace KoiPondOrderSystemManagement.Services
         {
             return await _paymentRepository.RemoveAsync(payment);
         }
+
+        public List<Payment> Search(string? paymentMethod = null, DateTime? fromDate = null, DateTime? toDate = null, string? status = null)
+        {
+            return _paymentRepository.Search(paymentMethod, fromDate, toDate, status);
+        }
     }
 }

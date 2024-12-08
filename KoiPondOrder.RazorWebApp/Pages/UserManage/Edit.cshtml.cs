@@ -33,6 +33,11 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.UserManage
                 return Redirect("/Login");
             }
 
+            if (loginAccount.Role.Equals("Customer"))
+            {
+                return StatusCode(403);
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -61,6 +66,24 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.UserManage
                 return Page();
             }
 
+            var user = await _userService.GetById(UserUpdate.UserId);
+            if (!UserUpdate.Email.ToLower().Equals(user.Email.ToLower()))
+            {
+                var exist = await _userService.CheckIfExistedEmail(UserUpdate.Email);
+                if (exist)
+                {
+                    ModelState.AddModelError("UserUpdate.Email", "There is an account with this email. Please input another email!");
+                    return Page();
+                }
+            }
+
+            var today = DateOnly.FromDateTime(DateTime.Now);
+            var yearsOld = today.Year - UserUpdate.DateOfBirth.Value.Year;
+            if (yearsOld < 18)
+            {
+                ModelState.AddModelError("UserUpdate.DateOfBirth", "The years old must be >= 18!");
+                return Page();
+            }
             try
             {
                 await _userService.Update(UserUpdate);

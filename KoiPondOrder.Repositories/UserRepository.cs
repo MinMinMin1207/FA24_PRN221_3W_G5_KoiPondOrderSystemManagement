@@ -84,5 +84,23 @@ namespace KoiPondOrderSystemManagement.Repositories
                 throw new Exception(ex.Message);
             }
         }
+
+        public async Task<bool> CheckIfExistedEmail(string email)
+        {
+            try
+            {
+                using var _context = new FA24_PRN221_3W_G5_KoiPondOrderSystemManagementContext();
+                var mailList = await _context.Users.Select(u => u.Email.ToLower()).ToListAsync();
+                if (mailList.Contains(email.ToLower()))
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

@@ -55,45 +55,91 @@
         border-radius: 8px;
     }
 
-    .form-group {
-        margin-bottom: 20px;
-    }
-
-    .alert {
-        font-size: 14px;
-        padding: 10px;
-    }
-
-    .form-control:focus {
-        box-shadow: none;
-        border-color: #007bff;
-    }
-</style>
-<body>
-    <div class="container">
-        <div class="card">
-            <h2 class="text-center">Login</h2>
-            <hr />
-            <form method="post">
-                <div class="form-group">
-                    <label asp-for="Input.Email" class="control-label">Email</label>
-                    <input asp-for="Input.Email" class="form-control" placeholder="Enter your email" />
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow rounded">
+                <!-- Header -->
+                <div class="card-header text-white text-center login-header">
+                    <h2>Welcome Back!</h2>
+                    <p>Please log in to access your account</p>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Input.PasswordHash" class="control-label">Password</label>
-                    <input asp-for="Input.PasswordHash" type="password" class="form-control" placeholder="Enter your password" />
-                    <span asp-validation-for="Input.PasswordHash" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Login</button>
-                </div>
+                <!-- Body -->
+                <div class="card-body login-body">
+                    <form method="post">
+                        <div class="form-group mb-3">
+                            <label asp-for="SystemAccount.Email" class="form-label"></label>
+                            <input asp-for="SystemAccount.Email" class="form-control login-input" placeholder="Enter your email" />
+                            <span asp-validation-for="SystemAccount.Email" class="text-danger"></span>
+                        </div>
 
-            </form>
+                        <div class="form-group mb-3">
+                            <label asp-for="SystemAccount.Password" class="form-label"></label>
+                            <input asp-for="SystemAccount.Password" class="form-control login-input" type="password" placeholder="Enter your password" />
+                            <span asp-validation-for="SystemAccount.Password" class="text-danger"></span>
+                        </div>
 
+                        <div asp-validation-summary="None" class="text-danger mb-3"></div>
+
+                        <div class="form-group text-center">
+                            <input type="submit" value="Login" class="btn login-btn w-100" />
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </body>
+
+
+<!-- Custom Styles -->
+<style>
+    /* Header styles */
+    .login-header {
+        background-color: #FF6500; /* Cam nhạt */
+        font-size: 1.2rem;
+    }
+
+    /* Body styles */
+    .login-body {
+        background-color: #F9F9F9; /* Nền trắng xám nhạt */
+    }
+
+    /* Input styles */
+    .login-input {
+        border: 1px solid #DDD; /* Viền xám nhẹ */
+        padding: 0.5rem;
+        border-radius: 4px;
+        transition: border-color 0.3s;
+    }
+
+        .login-input:focus {
+            border-color: #FF6500; /* Cam nhạt khi focus */
+            outline: none;
+            box-shadow: 0 0 4px #FF6500;
+        }
+
+    /* Button styles */
+    .login-btn {
+        background-color: #FF6500; /* Cam nhạt */
+        color: white;
+        border: none;
+        font-size: 1rem;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+        .login-btn:hover {
+            background-color: #E55C00; /* Cam đậm hơn khi hover */
+            transform: scale(1.02); /* Hiệu ứng phóng to nhẹ */
+        }
+
+    /* Card Shadow */
+    .card {
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
 
 
 @section Scripts {
