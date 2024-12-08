@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using KoiPondOrderSystemManagement.Services;
-using KoiPondOrder.Repositories.Models;
+using KoiPondOrderSystemManagement.Repositories.Models;
 
 namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.Promotions
 {
@@ -44,7 +44,7 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.Promotions
                 PageSize
             );
 
-            if(DiscountPercentage > 100 || DiscountPercentage < 0)
+            if (DiscountPercentage > 100 || DiscountPercentage < 0)
             {
                 TempData["Message"] = "DiscountPercentage must be between 0 and 100.";
             }

@@ -18,6 +18,7 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.Designs
         public CreateModel(DesignService designService, PromotionService promotionService)
         {
             _designService = designService;
+            _promotionService = promotionService;
         }
 
         public async Task<IActionResult> OnGet()

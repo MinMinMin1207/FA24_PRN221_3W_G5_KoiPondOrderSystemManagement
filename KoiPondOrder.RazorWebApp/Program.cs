@@ -14,8 +14,6 @@ namespace KoiPondOrder.RazorWebApp
             builder.Services.AddRazorPages();
             builder.Services.AddScoped<DesignService>();
             builder.Services.AddScoped<DesignRepository>();
-            builder.Services.AddScoped<PromotionService>();
-            builder.Services.AddScoped<PromotionRepository>();
 
 
             builder.Services.AddSession(options =>

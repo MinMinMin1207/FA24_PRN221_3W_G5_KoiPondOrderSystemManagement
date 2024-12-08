@@ -103,7 +103,8 @@
        asp-route-FromDate="@Model.FromDate"
        asp-route-ToDate="@Model.ToDate"
        asp-route-PaymentStatus="@Model.PaymentStatus"
-       class="btn" style="background-color: #FF6500; color: white; @(!Model.Payments.HasPreviousPage ? "disabled" : "")">
+       class="btn @(Model.Payments.HasPreviousPage ? "" : "disabled")"
+       style="background-color: #FF6500; color: white;">
         Previous
     </a>
     <a asp-page="./Index"
@@ -112,7 +113,8 @@
        asp-route-FromDate="@Model.FromDate"
        asp-route-ToDate="@Model.ToDate"
        asp-route-PaymentStatus="@Model.PaymentStatus"
-       class="btn" style="background-color: #FF6500; color: white; @(!Model.Payments.HasNextPage ? "disabled" : "")">
+       class="btn @(Model.Payments.HasNextPage ? "" : "disabled")"
+       style="background-color: #FF6500; color: white;">
         Next
     </a>
 </div>
