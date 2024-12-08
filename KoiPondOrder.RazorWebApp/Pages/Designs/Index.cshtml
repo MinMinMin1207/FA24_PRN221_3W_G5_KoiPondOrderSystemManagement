@@ -1,0 +1,83 @@
+﻿@page
+@using X.PagedList.Mvc.Core
+@model KoiPondOrderSystemManagement.RazorWebApp.Pages.Designs.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Design List</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-primary">Create New</a>
+</p>
+
+<form method="get" class="mb-3">
+    <div class="row">
+        <div class="col-md-4">
+            <label for="SearchName" class="form-label">Search by Name</label>
+            <input type="text" id="SearchName" name="SearchName" class="form-control" value="@Model.SearchName" />
+        </div>
+        <div class="col-md-4">
+            <label for="SearchStyle" class="form-label">Search by Style</label>
+            <input type="text" id="SearchStyle" name="SearchStyle" class="form-control" value="@Model.SearchStyle" />
+        </div>
+        <div class="col-md-4">
+            <label for="SearchDescription" class="form-label">Search by Description</label>
+            <input type="text" id="SearchDescription" name="SearchDescription" class="form-control" value="@Model.SearchDescription" />
+        </div>
+    </div>
+    <div class="mt-3">
+        <button type="submit" class="btn btn-success">Search</button>
+    </div>
+</form>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-light">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Design[0].DesignName)</th>
+            <th>@Html.DisplayNameFor(model => model.Design[0].DesignStyle)</th>
+            <th>@Html.DisplayNameFor(model => model.Design[0].EstimatedCost)</th>
+            <th>@Html.DisplayNameFor(model => model.Design[0].Description)</th>
+            <th>@Html.DisplayNameFor(model => model.Design[0].ImagePath)</th>
+            <th>@Html.DisplayNameFor(model => model.Design[0].PopularityScore)</th>
+            <th>@Html.DisplayNameFor(model => model.Design[0].RecommendedUse)</th>
+            <th>@Html.DisplayNameFor(model => model.Design[0].ApprovalStatus)</th>
+            <th>@Html.DisplayNameFor(model => model.Design[0].Promotion)</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.PagedDesign)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.DesignName)</td>
+                <td>@Html.DisplayFor(modelItem => item.DesignStyle)</td>
+                <td>@Html.DisplayFor(modelItem => item.EstimatedCost)</td>
+                <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                <td>@Html.DisplayFor(modelItem => item.ImagePath)</td>
+                <td>@Html.DisplayFor(modelItem => item.PopularityScore)</td>
+                <td>@Html.DisplayFor(modelItem => item.RecommendedUse)</td>
+                <td>@Html.DisplayFor(modelItem => item.ApprovalStatus)</td>
+                <td>@Html.DisplayFor(modelItem => item.Promotion.PromotionName)</td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.DesignId" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-page="./Details" asp-route-id="@item.DesignId" class="btn btn-info btn-sm">Details</a>
+                    <a asp-page="./Delete" asp-route-id="@item.DesignId" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="d-flex justify-content-center">
+    @Html.PagedListPager(
+            Model.PagedDesign,
+            page => Url.Page("Index", new { PageNumber = page, SearchName = Model.SearchName, SearchStyle = Model.SearchStyle, SearchDescription = Model.SearchDescription }),
+            new PagedListRenderOptions
+    {
+        MaximumPageNumbersToDisplay = 5,
+    }
+
+            )
+</div>
