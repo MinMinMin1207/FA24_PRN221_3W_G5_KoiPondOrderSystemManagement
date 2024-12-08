@@ -52,5 +52,10 @@ namespace KoiPondOrderSystemManagement.Services
         {
             return _userRepository.Login(loginRequest);
         }
+
+        public async Task<bool> CheckIfExistedEmail(string email)
+        {
+            return await _userRepository.CheckIfExistedEmail(email);
+        }
     }
 }

@@ -9,7 +9,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-sm border-0">
-                <div class="card-header bg-primary text-white text-center py-4">
+                <div class="card-header custom-header text-white text-center py-4">
                     <h3 class="mb-0">User Details</h3>
                 </div>
                 <div class="card-body p-4">
@@ -41,10 +41,10 @@
                     </dl>
 
                     <div class="text-center mt-4">
-                        <a asp-page="./Edit" asp-route-id="@Model.User.UserId" class="btn btn-warning mx-2">
+                        <a asp-page="./Edit" asp-route-id="@Model.User.UserId" class="btn custom-btn-warning mx-2">
                             <i class="fas fa-edit"></i> Edit
                         </a>
-                        <a asp-page="./Index" class="btn btn-secondary mx-2">
+                        <a asp-page="./Index" class="btn custom-btn-secondary mx-2">
                             <i class="fas fa-arrow-left"></i> Back to List
                         </a>
                     </div>
@@ -53,6 +53,49 @@
         </div>
     </div>
 </div>
+
+<!-- Custom Styles -->
+<style>
+    /* Card Header */
+    .custom-header {
+        background-color: #C40C0C; /* Đỏ đậm cho header */
+    }
+
+    /* Button Styles */
+    .custom-btn-warning {
+        background-color: #FF8A08; /* Cam đậm cho nút Edit */
+        color: white;
+        border: none;
+        font-size: 1rem;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+        .custom-btn-warning:hover {
+            background-color: #FFC100; /* Vàng nhạt khi hover */
+            transform: scale(1.05);
+        }
+
+    .custom-btn-secondary {
+        background-color: #FF6500; /* Cam sáng cho nút Back */
+        color: white;
+        border: none;
+        font-size: 1rem;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+        .custom-btn-secondary:hover {
+            background-color: #FFC100; /* Vàng nhạt khi hover */
+            transform: scale(1.05);
+        }
+
+    /* Input Focus Styles */
+    .form-control:focus {
+        border-color: #FFC100; /* Màu cam dịu khi focus */
+        box-shadow: 0 0 4px #FFC100;
+        outline: none;
+    }
+</style>
+
 
 @section Scripts {
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>

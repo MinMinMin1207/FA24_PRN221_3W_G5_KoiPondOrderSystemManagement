@@ -7,20 +7,20 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using KoiPondOrder.Repositories.Models;
 using KoiPondOrderSystemManagement.Services;
+using KoiPondOrderSystemManagement.Repositories;
 
-namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.UserManage
+namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.PaymentManage
 {
     public class DetailsModel : PageModel
     {
+        private readonly PaymentService _paymentService;
 
-        private readonly UserService _userService;
-
-        public DetailsModel(UserService userService)
+        public DetailsModel(PaymentService paymentService)
         {
-            _userService = userService;
+            _paymentService = paymentService;
         }
 
-        public User User { get; set; } = default!;
+        public Payment Payment { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,25 +30,23 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.UserManage
             {
                 return Redirect("/Login");
             }
-
             if (loginAccount.Role.Equals("Customer"))
             {
                 return StatusCode(403);
             }
-
             if (id == null)
             {
                 return NotFound();
             }
 
-            var user = await _userService.GetById(id ?? default(int));
-            if (user == null)
+            var payment = await _paymentService.GetById(id.Value);
+            if (payment == null)
             {
                 return NotFound();
             }
             else
             {
-                User = user;
+                Payment = payment;
             }
             return Page();
         }

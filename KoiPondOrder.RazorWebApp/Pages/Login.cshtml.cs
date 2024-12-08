@@ -34,7 +34,7 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages
             if (logged != null)
             {
                 SetSession(logged);
-                return RedirectToPage("Index");
+                return RedirectToPage("/UserManage/Index");
             }
             return Page();
         }

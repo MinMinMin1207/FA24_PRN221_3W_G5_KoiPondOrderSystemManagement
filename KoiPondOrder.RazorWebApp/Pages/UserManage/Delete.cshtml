@@ -51,10 +51,10 @@
                     <form method="post" class="mt-4">
                         <input type="hidden" asp-for="User.UserId" />
                         <div class="d-flex justify-content-between">
-                            <button type="submit" class="btn btn-danger w-45">
+                            <button type="submit" class="btn custom-btn-danger w-45">
                                 <i class="fas fa-trash"></i> Delete
                             </button>
-                            <a asp-page="./Index" class="btn btn-secondary w-45">
+                            <a asp-page="./Index" class="btn custom-btn-secondary w-45">
                                 <i class="fas fa-arrow-left"></i> Cancel
                             </a>
                         </div>
@@ -64,6 +64,48 @@
         </div>
     </div>
 </div>
+
+<!-- Custom Styles -->
+<style>
+    /* Card Background */
+    .card {
+        background-color: #FFFAF0; /* Màu nền dịu mắt */
+    }
+
+    /* Button Styles */
+    .custom-btn-danger {
+        background-color: #C40C0C; /* Màu đỏ đậm */
+        color: white;
+        border: none;
+        font-size: 1rem;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+        .custom-btn-danger:hover {
+            background-color: #FF6500; /* Cam nhạt */
+            transform: scale(1.02);
+        }
+
+    .custom-btn-secondary {
+        background-color: #FF8A08; /* Cam đậm */
+        color: white;
+        border: none;
+        font-size: 1rem;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+        .custom-btn-secondary:hover {
+            background-color: #FFC100; /* Màu vàng nhạt */
+            transform: scale(1.02);
+        }
+
+    /* Input Focus Styles */
+    .form-control:focus {
+        border-color: #FFC100; /* Màu cam dịu khi focus */
+        box-shadow: 0 0 4px #FFC100;
+        outline: none;
+    }
+</style>
 
 @section Scripts {
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>

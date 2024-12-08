@@ -8,19 +8,21 @@ using Microsoft.EntityFrameworkCore;
 using KoiPondOrder.Repositories.Models;
 using KoiPondOrderSystemManagement.Services;
 
-namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.UserManage
+namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.PaymentManage
 {
     public class DeleteModel : PageModel
     {
-        private readonly UserService _userService;
+        private readonly PaymentService _paymentService;
+        private readonly OrderPaymentService _orderPaymentService;
 
-        public DeleteModel(UserService userService)
+        public DeleteModel(PaymentService paymentService, OrderPaymentService orderPaymentService)
         {
-            _userService = userService;
+            _paymentService = paymentService;
+            _orderPaymentService = orderPaymentService;
         }
 
         [BindProperty]
-        public User User { get; set; } = default!;
+        public Payment Payment { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -41,15 +43,15 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.UserManage
                 return NotFound();
             }
 
-            var user = await _userService.GetById(id ?? default(int));
+            var payment = await _paymentService.GetById(id ?? default(int));
 
-            if (user == null)
+            if (payment == null)
             {
                 return NotFound();
             }
             else
             {
-                User = user;
+                Payment = payment;
             }
             return Page();
         }
@@ -61,11 +63,14 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.UserManage
                 return NotFound();
             }
 
-            var user = await _userService.GetById(id ?? default(int));
-            if (user != null)
+            var payment = await _paymentService.GetById(id ?? default(int));
+            if (payment != null)
             {
-                User = user;
-                _userService.Delete(user);
+                Payment = payment;
+                var order = await _orderPaymentService.GetById(payment.OrderId);
+                order.PaymentId = null;
+                await _orderPaymentService.Update(order);
+                await _paymentService.Delete(payment);
             }
 
             return RedirectToPage("./Index");

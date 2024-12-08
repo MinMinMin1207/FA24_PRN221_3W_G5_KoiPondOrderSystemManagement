@@ -22,6 +22,8 @@ namespace KoiPondOrder.RazorWebApp
 
             builder.Services.AddScoped<UserService>();
 
+            builder.Services.AddScoped<OrderPaymentService>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -33,13 +35,21 @@ namespace KoiPondOrder.RazorWebApp
             }
 
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseAuthorization();
+
             app.UseSession();
             app.MapRazorPages();
+            app.MapGet("/", context =>
+            {
+                context.Response.Redirect("/Login");
+                return Task.CompletedTask;
+            });
+
 
             app.Run();
         }

@@ -1,0 +1,16 @@
+﻿@page
+@model KoiPondOrderSystemManagement.RazorWebApp.Pages.ForbiddenModel
+@{
+    ViewData["Title"] = "Error";
+}
+@if (Response.StatusCode == 403)
+{
+    <h1>403 Forbidden</h1>
+    <p>You do not have permission to access this resource.</p>
+}
+else
+{
+    Response.StatusCode = 404;
+    <h1>404 NotFound</h1>
+    <p>Cannot find this resource.</p>
+}

@@ -1,6 +1,7 @@
 ﻿using KoiPondOrder.Repositories;
 using KoiPondOrder.Repositories.Models;
 using KoiPondOrderSystemManagement.Repositories.DTOs;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,6 +58,24 @@ namespace KoiPondOrderSystemManagement.Repositories
                 }
                 else result = null;
                 return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<bool> CheckIfExistedEmail(string email)
+        {
+            try
+            {
+                using var _context = new FA24_PRN221_3W_G5_KoiPondOrderSystemManagementContext();
+                var mailList = await _context.Users.Select(u => u.Email.ToLower()).ToListAsync();
+                if (mailList.Contains(email.ToLower()))
+                {
+                    return true;
+                }
+                return false;
             }
             catch (Exception ex)
             {
