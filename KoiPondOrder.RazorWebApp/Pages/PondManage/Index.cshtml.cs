@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using KoiPondOrderSystemManagement.Services;
 using KoiPondOrderSystemManagement.RazorWebApp.Models;
 using Microsoft.AspNetCore.Authorization;
-using KoiPondOrder.Repositories.Models;
+using KoiPondOrderSystemManagement.Repositories.Models;
 
 namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.PondManage
 {

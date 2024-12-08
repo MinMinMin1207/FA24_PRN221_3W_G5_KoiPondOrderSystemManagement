@@ -1,6 +1,5 @@
 ﻿using KoiPondOrder.Repositories;
-using KoiPondOrder.Repositories.Models;
-
+using KoiPondOrderSystemManagement.Repositories.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System;
