@@ -1,40 +1,46 @@
-using KoiPondOrder.Repositories.Models;
-using KoiPondOrderSystemManagement.Repositories.DTOs;
 using KoiPondOrderSystemManagement.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Text.Json;
 
-namespace KoiPondOrderSystemManagement.RazorWebApp.Pages
+namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.LoginPage
 {
     public class LoginModel : PageModel
     {
         private readonly UserService _userService;
-
         public LoginModel(UserService userService)
         {
             _userService = userService;
+
+        }
+         [BindProperty]
+        public InputModel Input { get; set; }
+
+        public string ErrorMessage { get; set; } 
+
+        public class InputModel
+        {
+            public string Email { get; set; }
+            public string PasswordHash { get; set; }
         }
 
-        [BindProperty]
-        public LoginRequestModel SystemAccount { get; set; } = default!;
-
-        private void SetSession(User loginAccount)
+        public void OnGet()
         {
-            SessionHelper.SetObjectAsJson(HttpContext.Session, "LoginAccount", loginAccount);
         }
-
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost()
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return Page();
-            }
+                var user = _userService.CheckLogin(Input.Email, Input.PasswordHash);
+                if (user != null)
+                {
 
-            var logged = _userService.Login(SystemAccount);
-            if (logged != null)
-            {
-                SetSession(logged);
-                return RedirectToPage("Index");
+                    HttpContext.Session.SetString("UserEmail", user.Email);
+                    HttpContext.Session.SetString("UserRole", user.Role);
+
+                    return RedirectToPage("/Index");
+                }
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
             }
             return Page();
         }

@@ -17,6 +17,23 @@ namespace KoiPondOrderSystemManagement.Services
         {
             _userRepository = new UserRepository();
         }
+       
+        public async Task<List<User>> GetAllCustomer()
+        {
+            return await _userRepository.GetAllCustomers();
+        }
+        public async Task<List<User>> GetAllConsultingStaff()
+        {
+            return await _userRepository.GetAllConsultingStaff();
+        }
+        public async Task<List<User>> GetAllConstructionStaff()
+        {
+            return await _userRepository.GetAllConstructionStaff();
+        }
+        public async Task<List<User>> GetAllDesignStaff()
+        {
+            return await _userRepository.GetAllDesignStaff();
+        }
 
         public async Task<List<User>> GetAll()
         {
@@ -48,9 +65,6 @@ namespace KoiPondOrderSystemManagement.Services
             return _userRepository.Search(model);
         }
 
-        public User? Login(LoginRequestModel loginRequest)
-        {
-            return _userRepository.Login(loginRequest);
-        }
+        public User CheckLogin(string email, string password) => UserRepository.GetInstance().Checklogin(email, password);
     }
 }

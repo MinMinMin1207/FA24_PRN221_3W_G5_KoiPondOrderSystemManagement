@@ -1,0 +1,96 @@
+﻿@page
+@model KoiPondOrderSystemManagement.RazorWebApp.Pages.PondManage.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Pond</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Pond.PondId" />
+            <div class="form-group">
+                <label asp-for="Pond.CustomerId" class="control-label"></label>
+                <input asp-for="Pond.CustomerId" class="form-control" />
+                <span asp-validation-for="Pond.CustomerId" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Pond.ConsultingStaffId" class="control-label"></label>
+                <input asp-for="Pond.ConsultingStaffId" class="form-control" />
+                <span asp-validation-for="Pond.ConsultingStaffId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pond.DesignStaffId" class="control-label"></label>
+                <input asp-for="Pond.DesignStaffId" class="form-control" />
+                <span asp-validation-for="Pond.DesignStaffId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pond.ConstructionStaffId" class="control-label"></label>
+                <input asp-for="Pond.ConstructionStaffId" class="form-control" />
+                <span asp-validation-for="Pond.ConstructionStaffId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pond.PondName" class="control-label"></label>
+                <input asp-for="Pond.PondName" class="form-control" />
+                <span asp-validation-for="Pond.PondName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pond.DesignStyle" class="control-label"></label>
+                <input asp-for="Pond.DesignStyle" class="form-control" />
+                <span asp-validation-for="Pond.DesignStyle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pond.DesignId" class="control-label"></label>
+                <input asp-for="Pond.DesignId" class="form-control" />
+                <span asp-validation-for="Pond.DesignId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pond.PaymentId" class="control-label"></label>
+                <input asp-for="Pond.PaymentId" class="form-control" />
+                <span asp-validation-for="Pond.PaymentId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pond.PromotionId" class="control-label"></label>
+                <input asp-for="Pond.PromotionId" class="form-control" />
+                <span asp-validation-for="Pond.PromotionId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pond.Status" class="control-label"></label>
+                <input asp-for="Pond.Status" class="form-control" />
+                <span asp-validation-for="Pond.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pond.StartDate" class="control-label"></label>
+                <input asp-for="Pond.StartDate" class="form-control" />
+                <span asp-validation-for="Pond.StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pond.EndDate" class="control-label"></label>
+                <input asp-for="Pond.EndDate" class="form-control" />
+                <span asp-validation-for="Pond.EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pond.TotalCost" class="control-label"></label>
+                <input asp-for="Pond.TotalCost" class="form-control" />
+                <span asp-validation-for="Pond.TotalCost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
