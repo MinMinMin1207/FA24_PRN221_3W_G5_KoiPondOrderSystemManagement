@@ -1,0 +1,101 @@
+﻿@page
+@model KoiPondOrderSystemManagement.RazorWebApp.Pages.PaymentManage.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1 class="mb-4 text-center" style="color:#FF8A08;">@ViewData["Title"]</h1>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <!-- Payment Details Card -->
+            <div class="card shadow-lg" style="border-color:#FF8A08;">
+                <div class="card-header" style="background-color:#FF6500; color:white;">
+                    <h4 class="mb-0">Payment Details</h4>
+                </div>
+                <div class="card-body" style="background-color:#FFF8E1;">
+                    <dl class="row">
+                        <dt class="col-sm-3 font-weight-bold" style="color:#C40C0C;">
+                            @Html.DisplayNameFor(model => model.Payment.OrderId)
+                        </dt>
+                        <dd class="col-sm-9" style="color:#FF6500;">
+                            @Html.DisplayFor(model => model.Payment.OrderId)
+                        </dd>
+
+                        <dt class="col-sm-3 font-weight-bold" style="color:#C40C0C;">
+                            @Html.DisplayNameFor(model => model.Payment.PaymentMethod)
+                        </dt>
+                        <dd class="col-sm-9" style="color:#FF6500;">
+                            @Html.DisplayFor(model => model.Payment.PaymentMethod)
+                        </dd>
+
+                        <dt class="col-sm-3 font-weight-bold" style="color:#C40C0C;">
+                            @Html.DisplayNameFor(model => model.Payment.Amount)
+                        </dt>
+                        <dd class="col-sm-9" style="color:#FF6500;">
+                            @Html.DisplayFor(model => model.Payment.Amount)
+                        </dd>
+
+                        <dt class="col-sm-3 font-weight-bold" style="color:#C40C0C;">
+                            @Html.DisplayNameFor(model => model.Payment.PaymentDate)
+                        </dt>
+                        <dd class="col-sm-9" style="color:#FF6500;">
+                            @Html.DisplayFor(model => model.Payment.PaymentDate)
+                        </dd>
+
+                        <dt class="col-sm-3 font-weight-bold" style="color:#C40C0C;">
+                            @Html.DisplayNameFor(model => model.Payment.PaymentStatus)
+                        </dt>
+                        <dd class="col-sm-9" style="color:#FF6500;">
+                            @Html.DisplayFor(model => model.Payment.PaymentStatus)
+                        </dd>
+
+                        <dt class="col-sm-3 font-weight-bold" style="color:#C40C0C;">
+                            @Html.DisplayNameFor(model => model.Payment.CancellationReason)
+                        </dt>
+                        <dd class="col-sm-9" style="color:#FF6500;">
+                            @Html.DisplayFor(model => model.Payment.CancellationReason)
+                        </dd>
+
+                        <dt class="col-sm-3 font-weight-bold" style="color:#C40C0C;">
+                            @Html.DisplayNameFor(model => model.Payment.Tax)
+                        </dt>
+                        <dd class="col-sm-9" style="color:#FF6500;">
+                            @Html.DisplayFor(model => model.Payment.Tax)
+                        </dd>
+
+                        <dt class="col-sm-3 font-weight-bold" style="color:#C40C0C;">
+                            @Html.DisplayNameFor(model => model.Payment.Discount)
+                        </dt>
+                        <dd class="col-sm-9" style="color:#FF6500;">
+                            @Html.DisplayFor(model => model.Payment.Discount)
+                        </dd>
+
+                        <dt class="col-sm-3 font-weight-bold" style="color:#C40C0C;">
+                            @Html.DisplayNameFor(model => model.Payment.FinalAmount)
+                        </dt>
+                        <dd class="col-sm-9" style="color:#FF6500;">
+                            @Html.DisplayFor(model => model.Payment.FinalAmount)
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <!-- Action Buttons with Icons -->
+        <a asp-page="./Edit" asp-route-id="@Model.Payment.PaymentId" class="btn btn-warning btn-lg" style="background-color:#FF8A08; border-color:#FF8A08;">
+            <i class="fas fa-edit"></i> Edit
+        </a>
+        <a asp-page="./Index" class="btn btn-secondary btn-lg" style="background-color:#FF6500; border-color:#FF6500;">
+            <i class="fas fa-arrow-left"></i> Back to List
+        </a>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>  <!-- Font Awesome for Icons -->
+}

@@ -1,38 +1,106 @@
-﻿<!DOCTYPE html>
+﻿@using KoiPondOrder.Repositories.Models
+@using System.Text.Json
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - KoiPondOrder.RazorWebApp</title>
+    <title>@ViewData["Title"] - KoiPondOrderSystemManagement.RazorWebApp</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/KoiPondOrder.RazorWebApp.styles.css" asp-append-version="true" />
+
+    <style>
+        .custom-navbar {
+            background-color: #C40C0C;
+        }
+
+            .custom-navbar .navbar-brand {
+                color: #FFFFFF;
+            }
+
+            .custom-navbar .nav-link {
+                color: #FFFFFF !important;
+                transition: background-color 0.3s, color 0.3s;
+            }
+
+                .custom-navbar .nav-link:hover {
+                    background-color: #C40C0C;
+                    color: #FF8A08 !important;
+                }
+
+                .custom-navbar .nav-link.active {
+                    background-color: #FFC100;
+                    color: #FFFFFF !important;
+                    border-radius: 5px;
+                    font-weight: bold;
+                }
+
+            .custom-navbar .btn {
+                background-color: #FF8A08;
+                color: #FFFFFF;
+                border: none;
+                transition: background-color 0.3s;
+            }
+
+                .custom-navbar .btn:hover {
+                    background-color: #FBFFB1;
+                }
+    </style>
+
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm text-white shadow mb-3 custom-navbar">
+
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">KoiPondOrder.RazorWebApp</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <!-- Logo và tiêu đề -->
+                <a class="navbar-brand text-white fw-bold" asp-area="" asp-page="/Index">KoiPondOrderSystemManagement</a>
+
+                <!-- Nút mở menu trên màn hình nhỏ -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Designs/Index">Design</a>
-                        </li>
+
+                <!-- Nội dung menu -->
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <!-- Danh sách menu -->
+                    <ul class="navbar-nav me-auto">
+                        @foreach (var item in new[] {
+                        new { Name = "User", Page = "/UserManage/Index" },
+                        new { Name = "Payment", Page = "/PaymentManage/Index" },
+                        new { Name = "Pond", Page = "/PondManage/Index" },
+                        new { Name = "Services", Page = "/ServicesManage/Index" },
+                        new { Name = "Design", Page = "/Designs/Index" },
+                        })
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link @(ViewContext.RouteData.Values["Page"]?.ToString() == item.Page ? "active" : "") text-white"
+                                   asp-area="" asp-page="@item.Page">@item.Name</a>
+                            </li>
+                        }
                     </ul>
+
+                    <!-- Phần user và Logout -->
+                    <div class="d-flex align-items-center">
+                        @if (Context.Session.GetString("LoginAccount") is string userJson)
+                        {
+                            var user = JsonSerializer.Deserialize<User>(userJson);
+                            <span class="text-white me-3">Welcome, @user.FullName</span>
+                            <a class="btn btn-danger btn-sm" asp-area="" asp-page="/LogOut">Log Out</a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-light btn-sm" asp-area="" asp-page="/Login">Login</a>
+                        }
+                    </div>
                 </div>
             </div>
         </nav>
     </header>
+
+
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()

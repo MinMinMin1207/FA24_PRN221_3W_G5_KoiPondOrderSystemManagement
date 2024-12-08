@@ -26,10 +26,12 @@ namespace KoiPondOrder.Repositories
         {
             return _context.Set<T>().ToList();
         }
+
         public async Task<List<T>> GetAllAsync()
         {
             return await _context.Set<T>().ToListAsync();
         }
+
         public void Create(T entity)
         {
             _context.Add(entity);

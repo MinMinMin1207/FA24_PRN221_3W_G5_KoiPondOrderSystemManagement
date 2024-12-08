@@ -1,0 +1,94 @@
+﻿@page
+@model KoiPondOrderSystemManagement.RazorWebApp.Pages.UserManage.IndexModel
+
+@{
+    ViewData["Title"] = "User Management";
+}
+
+<h1 class="mb-4" style="color: #C40C0C;">User Management</h1>
+
+<p>
+    <a asp-page="Create" class="btn" style="background-color: #FF6500; color: white;">Create New User</a>
+</p>
+
+<p>
+    <form method="get">
+        <div class="form-group">
+            <label asp-for="SearchModel.FullName" style="color: #FF8A08;"></label>
+            <input asp-for="SearchModel.FullName" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="SearchModel.Email" style="color: #FF8A08;"></label>
+            <input asp-for="SearchModel.Email" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="SearchModel.Address" style="color: #FF8A08;"></label>
+            <input asp-for="SearchModel.Address" class="form-control" />
+        </div>
+        <button type="submit" class="btn" style="background-color: #FF6500; color: white;">Search</button>
+    </form>
+</p>
+
+<div class="table-responsive">
+    <table class="table table-hover table-bordered align-middle">
+        <thead class="table-dark text-center" style="background-color: #FFC100; color: white;">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.User[0].FullName)</th>
+                <th>@Html.DisplayNameFor(model => model.User[0].Email)</th>
+                <th>@Html.DisplayNameFor(model => model.User[0].PhoneNumber)</th>
+                <th>@Html.DisplayNameFor(model => model.User[0].Address)</th>
+                <th>@Html.DisplayNameFor(model => model.User[0].Role)</th>
+                <th>@Html.DisplayNameFor(model => model.User[0].DateOfBirth)</th>
+                <th>@Html.DisplayNameFor(model => model.User[0].Gender)</th>
+                <th>@Html.DisplayNameFor(model => model.User[0].Status)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.User)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.FullName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                    <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Role)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DateOfBirth)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Gender)</td>
+                    <td>
+                        <span class="badge @(item.Status ? "bg-success" : "bg-secondary")">
+                            @(item.Status ? "Active" : "Inactive")
+                        </span>
+                    </td>
+                    <td class="text-center">
+                        <a asp-page="./Edit" asp-route-id="@item.UserId" class="btn btn-sm" style="background-color: #FF8A08; color: white;">Edit</a>
+                        <a asp-page="./Details" asp-route-id="@item.UserId" class="btn btn-sm" style="background-color: #FFC100; color: white;">Details</a>
+                        <a asp-page="./Delete" asp-route-id="@item.UserId" class="btn btn-sm" style="background-color: #C40C0C; color: white;">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@{
+    var prevDisabled = !Model.User.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.User.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-pageIndex="@(Model.User.PageIndex - 1)"
+   asp-route-SearchModel.FullName="@Model.SearchModel.FullName"
+   asp-route-SearchModel.Email="@Model.SearchModel.Email"
+   asp-route-SearchModel.Address="@Model.SearchModel.Address"
+   class="btn" style="background-color: #FF6500; color: white; @prevDisabled">
+    Previous
+</a>
+<a asp-page="./Index"
+   asp-route-pageIndex="@(Model.User.PageIndex + 1)"
+   asp-route-SearchModel.FullName="@Model.SearchModel.FullName"
+   asp-route-SearchModel.Email="@Model.SearchModel.Email"
+   asp-route-SearchModel.Address="@Model.SearchModel.Address"
+   class="btn" style="background-color: #FF6500; color: white; @nextDisabled">
+    Next
+</a>

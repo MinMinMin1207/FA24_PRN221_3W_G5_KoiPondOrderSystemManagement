@@ -2,6 +2,7 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace KoiPondOrderSystemManagement.Repositories.Models;
 
@@ -9,21 +10,33 @@ public partial class User
 {
     public int UserId { get; set; }
 
-    public string FullName { get; set; }
+    [Required(ErrorMessage = "Please input this field!")]
+    [RegularExpression(@"^([A-Z][a-zA-Z]*\s)*[A-Z][a-zA-Z]*$", ErrorMessage = "Full name just contains a-z characters. The first letter of each word is capital!")]
+    public string FullName { get; set; } = null!;
 
-    public string Email { get; set; }
+    [Required(ErrorMessage = "Please input this field!")]
+    [EmailAddress]
+    public string Email { get; set; } = null!;
 
-    public string PhoneNumber { get; set; }
+    [Required(ErrorMessage = "Please input this field!")]
+    [RegularExpression(@"^\d+$", ErrorMessage = "Please input only number!")]
+    [Length(10, 11, ErrorMessage = "Please input 10 or 11 phone number!")]
+    public string PhoneNumber { get; set; } = null!;
 
-    public string Address { get; set; }
+    [Required(ErrorMessage = "Please input this field!")]
+    public string? Address { get; set; }
 
-    public string Role { get; set; }
+    [Required(ErrorMessage = "Please input this field!")]
+    public string Role { get; set; } = null!;
 
-    public string PasswordHash { get; set; }
+    [Required(ErrorMessage = "Please input this field!")]
+    public string? PasswordHash { get; set; } = "Temp";
 
+    [Required(ErrorMessage = "Please input this field!")]
     public DateOnly? DateOfBirth { get; set; }
 
-    public string Gender { get; set; }
+    [Required(ErrorMessage = "Please input this field!")]
+    public string? Gender { get; set; }
 
     public bool Status { get; set; }
 
