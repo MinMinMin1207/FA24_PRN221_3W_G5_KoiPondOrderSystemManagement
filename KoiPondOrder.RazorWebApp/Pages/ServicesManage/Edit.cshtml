@@ -1,0 +1,85 @@
+﻿@page
+@model KoiPondOrderSystemManagement.RazorWebApp.Pages.ServicesManage.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Service</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Service.ServiceId" />
+            <div class="form-group">
+                <label asp-for="Service.CustomerId" class="control-label"></label>
+                <input asp-for="Service.CustomerId" class="form-control" />
+                <span asp-validation-for="Service.CustomerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Service.StaffId" class="control-label"></label>
+                <input asp-for="Service.StaffId" class="form-control" />
+                <span asp-validation-for="Service.StaffId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Service.ServiceType" class="control-label"></label>
+                <input asp-for="Service.ServiceType" class="form-control" />
+                <span asp-validation-for="Service.ServiceType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Service.ServiceDate" class="control-label"></label>
+                <input asp-for="Service.ServiceDate" class="form-control" />
+                <span asp-validation-for="Service.ServiceDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Service.ServiceStatus" class="control-label"></label>
+                <input asp-for="Service.ServiceStatus" class="form-control" />
+                <span asp-validation-for="Service.ServiceStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Service.PaymentId" class="control-label"></label>
+                <input asp-for="Service.PaymentId" class="form-control" />
+                <span asp-validation-for="Service.PaymentId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Service.PromotionId" class="control-label"></label>
+                <input asp-for="Service.PromotionId" class="form-control" />
+                <span asp-validation-for="Service.PromotionId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Service.Result" class="control-label"></label>
+                <input asp-for="Service.Result" class="form-control" />
+                <span asp-validation-for="Service.Result" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Service.Feedback" class="control-label"></label>
+                <input asp-for="Service.Feedback" class="form-control" />
+                <span asp-validation-for="Service.Feedback" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Service.Rating" class="control-label"></label>
+                <input asp-for="Service.Rating" class="form-control" />
+                <span asp-validation-for="Service.Rating" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Service.Cost" class="control-label"></label>
+                <input asp-for="Service.Cost" class="form-control" />
+                <span asp-validation-for="Service.Cost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

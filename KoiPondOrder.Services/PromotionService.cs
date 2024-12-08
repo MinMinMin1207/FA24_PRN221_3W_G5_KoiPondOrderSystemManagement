@@ -1,6 +1,7 @@
-﻿using KoiPondOrder.Repositories.Models;
+using KoiPondOrder.Repositories.Models;
 using KoiPondOrderSystemManagement.Repositories;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using KoiPondOrderSystemManagement.Repositories.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 using static KoiPondOrderSystemManagement.Repositories.PromotionRepository;
 
+
 namespace KoiPondOrderSystemManagement.Services
 {
     public class PromotionService
     {
-
         private readonly PromotionRepository _repository;
 
         public PromotionService()

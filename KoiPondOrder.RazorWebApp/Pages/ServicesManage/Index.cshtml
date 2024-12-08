@@ -1,0 +1,113 @@
+﻿@page
+@model KoiPondOrderSystemManagement.RazorWebApp.Pages.ServicesManage.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<form method="post" asp-page-handler="Search" class="mt-3">
+    <div class="row">
+        <div class="col-md-4">
+            <input type="text" name="SearchModel.Staff" placeholder="Staff" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <input type="text" name="SearchModel.Customer" placeholder="Customer" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <input type="text" name="SearchModel.PaymentMethod" placeholder="Payment Method" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-success">Search</button>
+        </div>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Service[0].ServiceType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Service[0].ServiceDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Service[0].ServiceStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Service[0].Result)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Service[0].Feedback)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Service[0].Rating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Service[0].Cost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Service[0].Customer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Service[0].Payment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Service[0].Promotion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Service[0].Staff)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Service)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServiceType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServiceDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServiceStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Result)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Feedback)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rating)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Payment.PaymentMethod)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Promotion.PromotionName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Staff.Email)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ServiceId">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ServiceId">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ServiceId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
