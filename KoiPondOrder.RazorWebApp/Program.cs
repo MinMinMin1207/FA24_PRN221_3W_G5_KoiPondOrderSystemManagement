@@ -1,3 +1,5 @@
+using KoiPondOrderSystemManagement.Services;
+
 namespace KoiPondOrder.RazorWebApp
 {
     public class Program
@@ -8,6 +10,19 @@ namespace KoiPondOrder.RazorWebApp
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
+            builder.Services.AddScoped<PaymentService>();
+
+            builder.Services.AddScoped<UserService>();
+
+            builder.Services.AddScoped<OrderPaymentService>();
 
             var app = builder.Build();
 
@@ -20,13 +35,21 @@ namespace KoiPondOrder.RazorWebApp
             }
 
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseAuthorization();
 
+            app.UseSession();
             app.MapRazorPages();
+            app.MapGet("/", context =>
+            {
+                context.Response.Redirect("/Login");
+                return Task.CompletedTask;
+            });
+
 
             app.Run();
         }

@@ -1,0 +1,147 @@
+﻿@page
+@model KoiPondOrderSystemManagement.RazorWebApp.Pages.UserManage.EditModel
+
+@{
+    ViewData["Title"] = "Edit User";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header custom-header text-white text-center py-4">
+                    <h3 class="mb-0">Edit User Information</h3>
+                </div>
+                <div class="card-body p-4">
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="UserUpdate.UserId" />
+
+                        <!-- Full Name -->
+                        <div class="form-group mb-3">
+                            <label asp-for="UserUpdate.FullName" class="form-label"></label>
+                            <input asp-for="UserUpdate.FullName" class="form-control custom-input" placeholder="Enter full name" />
+                            <span asp-validation-for="UserUpdate.FullName" class="text-danger"></span>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-group mb-3">
+                            <label asp-for="UserUpdate.Email" class="form-label"></label>
+                            <input asp-for="UserUpdate.Email" class="form-control custom-input" placeholder="Enter email address" />
+                            <span asp-validation-for="UserUpdate.Email" class="text-danger"></span>
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div class="form-group mb-3">
+                            <label asp-for="UserUpdate.PhoneNumber" class="form-label"></label>
+                            <input asp-for="UserUpdate.PhoneNumber" class="form-control custom-input" placeholder="Enter phone number" />
+                            <span asp-validation-for="UserUpdate.PhoneNumber" class="text-danger"></span>
+                        </div>
+
+                        <!-- Address -->
+                        <div class="form-group mb-3">
+                            <label asp-for="UserUpdate.Address" class="form-label"></label>
+                            <input asp-for="UserUpdate.Address" class="form-control custom-input" placeholder="Enter address" />
+                            <span asp-validation-for="UserUpdate.Address" class="text-danger"></span>
+                        </div>
+
+                        <!-- Role -->
+                        <div class="form-group mb-3">
+                            <label asp-for="UserUpdate.Role" class="form-label"></label>
+                            <select asp-for="UserUpdate.Role" class="form-control custom-input" asp-items="ViewBag.AccountRole"></select>
+                            <span asp-validation-for="UserUpdate.Role" class="text-danger"></span>
+                        </div>
+
+                        <!-- Date of Birth -->
+                        <div class="form-group mb-3">
+                            <label asp-for="UserUpdate.DateOfBirth" class="form-label"></label>
+                            <input asp-for="UserUpdate.DateOfBirth" class="form-control custom-input" placeholder="Select date of birth" type="date" />
+                            <span asp-validation-for="UserUpdate.DateOfBirth" class="text-danger"></span>
+                        </div>
+
+                        <!-- Gender -->
+                        <div class="form-group mb-3">
+                            <label asp-for="UserUpdate.Gender" class="form-label"></label>
+                            <select asp-for="UserUpdate.Gender" class="form-control custom-input" asp-items="ViewBag.AccountGender"></select>
+                            <span asp-validation-for="UserUpdate.Gender" class="text-danger"></span>
+                        </div>
+
+                        <!-- Status (Checkbox) -->
+                        <div class="form-group form-check mb-3">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="UserUpdate.Status" /> @Html.DisplayNameFor(model => model.UserUpdate.Status)
+                            </label>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn custom-btn-success">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4 text-center">
+        <a asp-page="./Index" class="btn custom-btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back to List
+        </a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+}
+
+<!-- Custom Styles -->
+<style>
+    /* Card Header */
+    .custom-header {
+        background-color: #C40C0C; /* Đỏ đậm cho header */
+    }
+
+    /* Form Inputs */
+    .custom-input {
+        border: 1px solid #FF6500; /* Cam sáng cho border */
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+        .custom-input:focus {
+            border-color: #FFC100; /* Màu vàng nhạt khi focus */
+            box-shadow: 0 0 4px #FFC100;
+            outline: none;
+        }
+
+    /* Button Styles */
+    .custom-btn-success {
+        background-color: #FF8A08; /* Cam đậm cho nút Save */
+        color: white;
+        border: none;
+        font-size: 1rem;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+        .custom-btn-success:hover {
+            background-color: #FFC100; /* Vàng nhạt khi hover */
+            transform: scale(1.05);
+        }
+
+    .custom-btn-secondary {
+        background-color: #FF6500; /* Cam sáng cho nút Back */
+        color: white;
+        border: none;
+        font-size: 1rem;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+        .custom-btn-secondary:hover {
+            background-color: #FFC100; /* Vàng nhạt khi hover */
+            transform: scale(1.05);
+        }
+</style>
