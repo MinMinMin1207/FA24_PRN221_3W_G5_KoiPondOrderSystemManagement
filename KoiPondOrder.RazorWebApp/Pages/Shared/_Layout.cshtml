@@ -90,11 +90,7 @@
                         {
                             var user = JsonSerializer.Deserialize<User>(userJson);
                             <span class="text-white me-3">Welcome, @user.FullName</span>
-                            <a class="btn btn-danger btn-sm" asp-area="" asp-page="/LogOut">Log Out</a>
-                        }
-                        else
-                        {
-                            <a class="btn btn-light btn-sm" asp-area="" asp-page="/Login">Login</a>
+                            <a class="btn btn-danger btn-sm" asp-area="" asp-page="/LogOut/Index">Log Out</a>
                         }
                     </div>
                 </div>
