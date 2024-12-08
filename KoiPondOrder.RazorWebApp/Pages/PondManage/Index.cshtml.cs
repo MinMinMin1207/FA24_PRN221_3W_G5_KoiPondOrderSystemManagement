@@ -27,18 +27,20 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.PondManage
 
         public async Task<IActionResult> OnGetAsync()
         {
-            var userRole = HttpContext.Session.GetString("UserRole");
+            var loginAccount = SessionHelper.GetLoginAccount(HttpContext.Session, "LoginAccount");
 
-           
-            if (userRole != "Manager")
+            if (loginAccount == null)
             {
-                
-                return RedirectToPage("/Index");
+                return Redirect("/Login");
+            }
+            if (loginAccount.Role.Equals("Customer"))
+            {
+                return StatusCode(403);
             }
 
-           
-          
-          
+
+
+
             Pond = await _pondsService.GetAllWithDetails();
             return Page();
 

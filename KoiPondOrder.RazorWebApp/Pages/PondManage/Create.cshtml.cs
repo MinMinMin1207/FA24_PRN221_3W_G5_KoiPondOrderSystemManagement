@@ -24,6 +24,16 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.PondManage
 
         public async Task<IActionResult> OnGet()
         {
+            var loginAccount = SessionHelper.GetLoginAccount(HttpContext.Session, "LoginAccount");
+
+            if (loginAccount == null)
+            {
+                return Redirect("/Login");
+            }
+            if (loginAccount.Role.Equals("Customer"))
+            {
+                return StatusCode(403);
+            }
             ViewData["Customers"] = new SelectList(await _userService.GetAllCustomer(), "Id", "FullName");
             ViewData["ConsultingStaff"] = new SelectList(await _userService.GetAllConsultingStaff(), "Id", "FullName");
             ViewData["DesignStaff"] = new SelectList(await _userService.GetAllDesignStaff(), "Id", "FullName");

@@ -1,3 +1,5 @@
+using KoiPondOrder.Repositories.Models;
+using KoiPondOrderSystemManagement.Repositories.DTOs;
 using KoiPondOrderSystemManagement.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -13,27 +15,21 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.LoginPage
             _userService = userService;
 
         }
-         [BindProperty]
-        public InputModel Input { get; set; }
+        [BindProperty]
+        public LoginRequestModel SystemAccount { get; set; } = default!;
 
-        public string ErrorMessage { get; set; } 
-
-        public class InputModel
+        private void SetSession(User loginAccount)
         {
-            public string Email { get; set; }
-            public string PasswordHash { get; set; }
+            SessionHelper.SetObjectAsJson(HttpContext.Session, "LoginAccount", loginAccount);
         }
 
-        public void OnGet()
+        public async Task<IActionResult> OnPostAsync()
         {
-        }
-        public IActionResult OnPost()
-        {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var user = _userService.CheckLogin(Input.Email, Input.PasswordHash);
-                if (user != null)
-                {
+                return Page();
+            }
+
             var logged = _userService.Login(SystemAccount);
             if (logged != null)
             {

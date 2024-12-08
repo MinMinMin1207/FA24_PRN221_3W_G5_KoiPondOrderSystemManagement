@@ -68,22 +68,26 @@ namespace KoiPondOrderSystemManagement.Repositories
         {
             return await _context.Users.Where(u => u.Role == "ConstructionStaff").ToListAsync();
         }
-        public User Checklogin(string email, string password)
+        public User? Login(LoginRequestModel model)
         {
-            var u = new User();
             try
             {
-                using (var db = new FA24_PRN221_3W_G5_KoiPondOrderSystemManagementContext())
+                using var _context = new FA24_PRN221_3W_G5_KoiPondOrderSystemManagementContext();
+                var result = new User();
+                var user = _context.Users.FirstOrDefault(u => u.Email.ToLower().Equals(model.Email.ToLower()));
+                if (BCrypt.Net.BCrypt.Verify(model.Password, user.PasswordHash))
                 {
-                    u = db.Users.FirstOrDefault(x => x.Email.Equals(email) && x.PasswordHash.Equals(password));
-                    return u;
+                    result = user;
                 }
+                else result = null;
+                return result;
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
+
 
         public async Task<bool> CheckIfExistedEmail(string email)
         {

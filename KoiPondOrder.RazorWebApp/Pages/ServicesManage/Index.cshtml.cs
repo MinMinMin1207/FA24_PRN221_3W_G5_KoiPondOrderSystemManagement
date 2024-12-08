@@ -21,22 +21,25 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.ServicesManage
             _servicesService = servicesService;
         }
 
-        public IList<Service> Service { get;set; } = default!;
+        public IList<Service> Service { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync()
         {
-            var userRole = HttpContext.Session.GetString("UserRole");
+            var loginAccount = SessionHelper.GetLoginAccount(HttpContext.Session, "LoginAccount");
 
-           
-            if (userRole != "Manager")
+            if (loginAccount == null)
             {
-                return RedirectToPage("/Index");
+                return Redirect("/Login");
+            }
+            if (loginAccount.Role.Equals("Customer"))
+            {
+                return StatusCode(403);
             }
 
-            
+
             Service = await _servicesService.GetServicesWithDetails();
 
-            
+
             return Page();
         }
         public async Task OnPostSearchAsync()
