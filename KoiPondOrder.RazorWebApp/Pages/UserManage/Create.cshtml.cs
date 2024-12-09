@@ -70,6 +70,7 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.UserManage
             User.PasswordHash = password;
             User.Status = true;
             await _userService.Create(User);
+            TempData["SuccessMessage"] = "User created successfully!";
 
             return RedirectToPage("./Index");
         }

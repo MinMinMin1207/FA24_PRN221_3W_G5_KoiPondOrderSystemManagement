@@ -5,7 +5,27 @@
     ViewData["Title"] = "User Management";
 }
 
+<style>
+    /* Add hover effect to table rows */
+    .table-hover tbody tr:hover {
+        background-color: #FFEDCC; /* Light orange background */
+        cursor: pointer; /* Change cursor to pointer for better UX */
+    }
+
+    /* Add hover effect to buttons */
+    .btn:hover {
+        filter: brightness(1.2); /* Slightly brighten the button */
+    }
+</style>
+
 <h1 class="mb-4 text-center" style="color: #FF6500;">User Management</h1>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div id="success-alert" class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
 
 <p>
     <a asp-page="Create" class="btn" style="background-color: #FF8A08; color: white; margin-bottom: 1rem;">Create New User</a>
@@ -38,7 +58,7 @@
 </div>
 
 <div class="table-responsive">
-    <table class="table table-striped table-bordered align-middle">
+    <table class="table table-hover table-striped table-bordered align-middle">
         <thead style="background-color: #C40C0C; color: white;">
             <tr>
                 <th>@Html.DisplayNameFor(model => model.User[0].FullName)</th>
@@ -77,9 +97,9 @@
                             </span>
                         </td>
                         <td>
-                            <a asp-page="./Edit" asp-route-id="@item.UserId" class="btn btn-sm" style="background-color: #FF8A08; color: white;">Edit</a>
-                            <a asp-page="./Details" asp-route-id="@item.UserId" class="btn btn-sm" style="background-color: #FFC100; color: white;">Details</a>
-                            <a asp-page="./Delete" asp-route-id="@item.UserId" class="btn btn-sm" style="background-color: #C40C0C; color: white;">Delete</a>
+                            <a asp-page="./Edit" asp-route-id="@item.UserId" class="btn btn-sm" style="background-color: #FF8A08; color: white;">✏️ Edit</a>
+                            <a asp-page="./Details" asp-route-id="@item.UserId" class="btn btn-sm" style="background-color: #FFC100; color: white;">ℹ️ Details</a>
+                            <a asp-page="./Delete" asp-route-id="@item.UserId" class="btn btn-sm" style="background-color: #C40C0C; color: white;">🗑️ Delete</a>
                         </td>
                     </tr>
                 }
@@ -87,6 +107,7 @@
         </tbody>
     </table>
 </div>
+
 
 <div class="d-flex justify-content-between mt-4">
     <a asp-page="./Index"
@@ -96,7 +117,7 @@
        asp-route-SearchModel.Address="@Model.SearchModel.Address"
        class="btn @(Model.User.HasPreviousPage ? "" : "disabled")"
        style="background-color: #FF6500; color: white;">
-        Previous
+        ⬅ Previous
     </a>
 
     <a asp-page="./Index"
@@ -106,8 +127,22 @@
        asp-route-SearchModel.Address="@Model.SearchModel.Address"
        class="btn @(Model.User.HasNextPage ? "" : "disabled")"
        style="background-color: #FF6500; color: white;">
-        Next
+        Next ➡
     </a>
 
 
 </div>
+
+@section Scripts {
+    <script>
+        // Auto-hide the alert after 3 seconds (3000 milliseconds)
+        setTimeout(function () {
+            var alert = document.getElementById('success-alert');
+            if (alert) {
+                alert.style.transition = "opacity 0.5s ease-out"; // Smooth fade out
+                alert.style.opacity = "0";
+                setTimeout(function () { alert.remove(); }, 500); // Remove after fade-out
+            }
+        }, 3000);
+    </script>
+}

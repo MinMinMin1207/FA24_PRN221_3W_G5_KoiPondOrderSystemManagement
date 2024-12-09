@@ -66,6 +66,7 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.UserManage
             {
                 User = user;
                 _userService.Delete(user);
+                TempData["SuccessMessage"] = "User deleted successfully!";
             }
 
             return RedirectToPage("./Index");

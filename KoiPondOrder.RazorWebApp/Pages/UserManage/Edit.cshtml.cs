@@ -87,6 +87,7 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.UserManage
             try
             {
                 await _userService.Update(UserUpdate);
+                TempData["SuccessMessage"] = "User updated successfully!";
             }
             catch (DbUpdateConcurrencyException)
             {

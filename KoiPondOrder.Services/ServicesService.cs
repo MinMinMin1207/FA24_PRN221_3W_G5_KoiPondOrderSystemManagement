@@ -58,5 +58,10 @@ namespace KoiPondOrderSystemManagement.Services
         {
             return await _servicesRepository.SearchServices(staff, customer, payment);
         }
+
+        public async Task UpdateRange(List<Service> serviceList)
+        {
+            await _servicesRepository.UpdateRange(serviceList);
+        }
     }
 }
