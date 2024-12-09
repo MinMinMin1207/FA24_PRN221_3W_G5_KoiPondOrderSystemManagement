@@ -34,6 +34,17 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.OrderManage
 
         public async Task<IActionResult> OnGet()
         {
+            var loginAccount = SessionHelper.GetLoginAccount(HttpContext.Session, "LoginAccount");
+
+            if (loginAccount == null)
+            {
+                return Redirect("/Login");
+            }
+
+            if (loginAccount.Role.Equals("Customer"))
+            {
+                return StatusCode(403);
+            }
             var users = await _userService.GetAll();
             if (users == null || !users.Any())
             {
@@ -64,10 +75,9 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.OrderManage
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //}
             await _orderService.Create(Order);
             //_context.Add(Order);
             //await _context.SaveChangesAsync();

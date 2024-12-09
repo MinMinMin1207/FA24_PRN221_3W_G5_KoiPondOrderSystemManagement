@@ -33,7 +33,7 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.UserManage
             {
                 return Redirect("/Login");
             }
-            if (loginAccount.Role.Equals("Customer"))
+            if (!loginAccount.Role.Equals("Admin") && !loginAccount.Role.Equals("Manager"))
             {
                 return StatusCode(403);
             }
@@ -48,6 +48,7 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.UserManage
             {
                 listUser = await _userService.GetAll();
             }
+
             listUser = listUser.OrderByDescending(x => x.UserId).ToList();
 
             User = Pagination<User>.Create(listUser, pageIndex ?? 1, pageSize: 5);

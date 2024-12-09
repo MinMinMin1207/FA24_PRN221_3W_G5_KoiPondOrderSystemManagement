@@ -39,13 +39,26 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.Designs
 
         public IPagedList<Design> PagedDesign { get; set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
+            var loginAccount = SessionHelper.GetLoginAccount(HttpContext.Session, "LoginAccount");
+
+            if (loginAccount == null)
+            {
+                return Redirect("/Login");
+            }
+
+            if (!loginAccount.Role.Equals("Admin") && !loginAccount.Role.Equals("Manager"))
+            {
+                return StatusCode(403);
+            }
+
             // Fetch data based on search criteria
             Design = await _designService.GetAll(SearchName, SearchStyle, SearchDescription);
 
             // Convert to paged list
             PagedDesign = Design.ToPagedList(PageNumber, PageSize);
+            return Page();
         }
     }
 }

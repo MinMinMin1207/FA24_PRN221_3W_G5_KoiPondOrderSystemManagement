@@ -23,6 +23,18 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.Designs
 
         public async Task<IActionResult> OnGet()
         {
+            var loginAccount = SessionHelper.GetLoginAccount(HttpContext.Session, "LoginAccount");
+
+            if (loginAccount == null)
+            {
+                return Redirect("/Login");
+            }
+
+            if (loginAccount.Role.Equals("Customer"))
+            {
+                return StatusCode(403);
+            }
+
             ViewData["PromotionId"] = new SelectList(await _promotionService.GetAll(), "PromotionId", "PromotionName");
             return Page();
         }

@@ -61,7 +61,7 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.PaymentManage
                 return Redirect("/Login");
             }
 
-            if (loginAccount.Role.Equals("Customer"))
+            if (!loginAccount.Role.Equals("Admin") && !loginAccount.Role.Equals("Manager"))
             {
                 return StatusCode(403);
             }

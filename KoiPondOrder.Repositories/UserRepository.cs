@@ -52,10 +52,12 @@ namespace KoiPondOrderSystemManagement.Repositories
                 throw new Exception(ex.Message);
             }
         }
+        
         public async Task<List<User>> GetAllCustomers()
         {
             return await _context.Users.Where(u => u.Role == "Customer").ToListAsync();
         }
+
         public async Task<List<User>> GetAllConsultingStaff()
         {
             return await _context.Users.Where(u => u.Role == "ConsultingStaff").ToListAsync();

@@ -22,7 +22,7 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.PondManage
             _userService = userService;
         }
 
-        public async Task<IActionResult> OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
             var loginAccount = SessionHelper.GetLoginAccount(HttpContext.Session, "LoginAccount");
 
@@ -34,14 +34,7 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.PondManage
             {
                 return StatusCode(403);
             }
-            ViewData["Customers"] = new SelectList(await _userService.GetAllCustomer(), "Id", "FullName");
-            ViewData["ConsultingStaff"] = new SelectList(await _userService.GetAllConsultingStaff(), "Id", "FullName");
-            ViewData["DesignStaff"] = new SelectList(await _userService.GetAllDesignStaff(), "Id", "FullName");
-            ViewData["ConstructionStaff"] = new SelectList(await _userService.GetAllConstructionStaff(), "Id", "FullName");
-            ViewData["Designs"] = new SelectList(await _pondService.GetAllDesigns(), "Id", "DesignName");
-            ViewData["Payments"] = new SelectList(await _pondService.GetAllPayments(), "Id", "PaymentMethod");
-            ViewData["Promotions"] = new SelectList(await _pondService.GetAllPromotions(), "Id", "PromotionName");
-            ViewData["Statuses"] = new SelectList(new List<string> { "Pending", "Completed", "In Progress" });
+            await LoadData();
             return Page();
         }
 
@@ -53,6 +46,7 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.PondManage
         {
             if (!ModelState.IsValid)
             {
+                await LoadData();
                 return Page();
             }
 
@@ -61,6 +55,17 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.PondManage
 
             return RedirectToPage("./Index");
         }
-        
+
+        private async Task LoadData()
+        {
+            ViewData["Customers"] = new SelectList(await _userService.GetAllCustomer(), "UserId", "FullName");
+            ViewData["ConsultingStaff"] = new SelectList(await _userService.GetAllConsultingStaff(), "UserId", "FullName");
+            ViewData["DesignStaff"] = new SelectList(await _userService.GetAllDesignStaff(), "UserId", "FullName");
+            ViewData["ConstructionStaff"] = new SelectList(await _userService.GetAllConstructionStaff(), "UserId", "FullName");
+            ViewData["Designs"] = new SelectList(await _pondService.GetAllDesigns(), "DesignId", "DesignName");
+            ViewData["Payments"] = new SelectList(await _pondService.GetAllPayments(), "PaymentId", "PaymentMethod");
+            ViewData["Promotions"] = new SelectList(await _pondService.GetAllPromotions(), "PromotionId", "PromotionName");
+            ViewData["Statuses"] = new SelectList(new List<string> { "Maintenance", "Completed", "UnderConstruction", "Designed", "Quoted", "Consulted", "Requested" });
+        }
     }
 }

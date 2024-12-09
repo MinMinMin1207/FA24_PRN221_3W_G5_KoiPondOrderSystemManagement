@@ -15,6 +15,7 @@ namespace KoiPondOrderSystemManagement.Repositories
         public PondsRepository(FA24_PRN221_3W_G5_KoiPondOrderSystemManagementContext context) {
             _context = context;
         }
+
         public async Task<List<Pond>> GetAllWithDetailsAsync()
         {
             return await _context.Ponds

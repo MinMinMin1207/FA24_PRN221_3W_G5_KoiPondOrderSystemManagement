@@ -27,123 +27,85 @@
 
 <div id="orderTableContainer">
     <table id="orderTable" class="table table-striped">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Order[0].OrderId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Order[0].OrderDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Order[0].OrderDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Order[0].TotalCost)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Order[0].DeliveryAddress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Order[0].DeliveryDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Order[0].OrderStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Order[0].Customer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Order[0].Payment)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Order[0].Promotion)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Order) {
-        <tr>
-             <td>
-                    @Html.DisplayFor(modelItem => item.OrderId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalCost)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DeliveryAddress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DeliveryDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Customer.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Payment.PaymentMethod)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Promotion.PromotionName)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.OrderId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.OrderId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.OrderId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-</div>
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/table-pagination.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#orderTable').createTablePagination({
-            rowPerPage: 5, 
-            paginationColor: '#4caf50',
-            fontColor: '#333333',
-            jumpPage: true
-        });
-        console.log('Table Pagination Script Loaded');
-
-    });
-</script>
-
-@* <head>
-    <title>Pagination Test</title>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/table-pagination.js"></script>
-</head>
-<body>
-    <table id="orderTable">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
+                <th>@Html.DisplayNameFor(model => model.OrderPagination[0].OrderId)</th>
+                <th>@Html.DisplayNameFor(model => model.OrderPagination[0].OrderDescription)</th>
+                <th>@Html.DisplayNameFor(model => model.OrderPagination[0].OrderDate)</th>
+                <th>@Html.DisplayNameFor(model => model.OrderPagination[0].TotalCost)</th>
+                <th>@Html.DisplayNameFor(model => model.OrderPagination[0].FinalCost)</th>
+                <th>@Html.DisplayNameFor(model => model.OrderPagination[0].DeliveryAddress)</th>
+                <th>@Html.DisplayNameFor(model => model.OrderPagination[0].DeliveryDate)</th>
+                <th>@Html.DisplayNameFor(model => model.OrderPagination[0].OrderStatus)</th>
+                <th>@Html.DisplayNameFor(model => model.OrderPagination[0].Customer)</th>
+                <th>@Html.DisplayNameFor(model => model.OrderPagination[0].Payment)</th>
+                <th>@Html.DisplayNameFor(model => model.OrderPagination[0].Promotion)</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr><td>1</td><td>Item 1</td></tr>
-            <tr><td>2</td><td>Item 2</td></tr>
-            <tr><td>3</td><td>Item 3</td></tr>
+            @foreach (var item in Model.OrderPagination)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.OrderId)</td>
+                    <td>@Html.DisplayFor(modelItem => item.OrderDescription)</td>
+                    <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TotalCost)</td>
+                    <td>@Html.DisplayFor(modelItem => item.FinalCost)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DeliveryAddress)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DeliveryDate)</td>
+                    <td>@Html.DisplayFor(modelItem => item.OrderStatus)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Customer.Email)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Payment.PaymentMethod)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Promotion.PromotionName)</td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.OrderId">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@item.OrderId">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.OrderId">Delete</a>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
+</div>
 
-    <script>
-        $(document).ready(function () {
-            $('#orderTable').createTablePagination({ rowPerPage: 2 });
-        });
-    </script>
-</body>
-</html> *@
+<div class="pagination">
+    <ul class="pagination">
+        @if (Model.OrderPagination.HasPreviousPage)
+        {
+            <li class="page-item">
+                <a class="page-link" asp-route-PageNumber="@(Model.OrderPagination.PageIndex - 1)" asp-route-SearchOrderId="@Model.SearchOrderId" asp-route-SearchDescription="@Model.SearchDescription" asp-route-SearchAddress="@Model.SearchAddress">Previous</a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item disabled"><span class="page-link">Previous</span></li>
+        }
+
+        @for (int i = 1; i <= Model.OrderPagination.TotalPages; i++)
+        {
+            if (i == Model.OrderPagination.PageIndex)
+            {
+                <li class="page-item active"><span class="page-link">@i</span></li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-route-PageNumber="@i" asp-route-SearchOrderId="@Model.SearchOrderId" asp-route-SearchDescription="@Model.SearchDescription" asp-route-SearchAddress="@Model.SearchAddress">@i</a>
+                </li>
+            }
+        }
+
+        @if (Model.OrderPagination.HasNextPage)
+        {
+            <li class="page-item">
+                <a class="page-link" asp-route-PageNumber="@(Model.OrderPagination.PageIndex + 1)" asp-route-SearchOrderId="@Model.SearchOrderId" asp-route-SearchDescription="@Model.SearchDescription" asp-route-SearchAddress="@Model.SearchAddress">Next</a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item disabled"><span class="page-link">Next</span></li>
+        }
+    </ul>
+</div>
+

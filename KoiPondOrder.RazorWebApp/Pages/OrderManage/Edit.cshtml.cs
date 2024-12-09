@@ -36,6 +36,18 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.OrderManage
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
+            var loginAccount = SessionHelper.GetLoginAccount(HttpContext.Session, "LoginAccount");
+
+            if (loginAccount == null)
+            {
+                return Redirect("/Login");
+            }
+
+            if (loginAccount.Role.Equals("Customer"))
+            {
+                return StatusCode(403);
+            }
+
             if (id <= 0)
             {
                 return NotFound();
@@ -68,14 +80,12 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.OrderManage
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more information, see https://aka.ms/RazorPagesCRUD.
+    
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //}
             await _orderService.Update(Order);
             //catch (DbUpdateConcurrencyException)
             //{

@@ -13,7 +13,6 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.OrderManage
 {
     public class IndexModel : PageModel
     {
-        //private readonly zPayment.Repositories.Models.FA24_PRN221_3W_G5_KoiPondOrderSystemManagementContext _context;
         private readonly OrderService _orderService;
 
         public IndexModel(OrderService orderService)
@@ -21,7 +20,7 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.OrderManage
             _orderService = orderService;
         }
 
-        public IList<Order> Order { get;set; } = default!;
+        public Pagination<Order> OrderPagination { get; set; } = default!;
         [BindProperty(SupportsGet = true)]
         public string? SearchOrderId { get; set; }
 
@@ -31,26 +30,44 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.OrderManage
         [BindProperty(SupportsGet = true)]
         public string? SearchAddress { get; set; }
 
-        public async Task OnGetAsync()
+        [BindProperty(SupportsGet = true)]
+        public int PageNumber { get; set; } = 1;
+
+        private const int PageSize = 10;
+
+        public async Task<IActionResult> OnGetAsync()
         {
-            //Order = await _context.Orders
-            //.Include(o => o.Customer)
-            //.Include(o => o.Payment)
-            //.Include(o => o.Promotion).ToListAsync();
-            if (!string.IsNullOrEmpty(SearchOrderId) ||
-            !string.IsNullOrEmpty(SearchDescription) ||
-            !string.IsNullOrEmpty(SearchAddress))
+            var loginAccount = SessionHelper.GetLoginAccount(HttpContext.Session, "LoginAccount");
+
+            if (loginAccount == null)
             {
-                Order = await _orderService.Search(SearchOrderId, SearchDescription, SearchAddress);
+                return Redirect("/Login");
+            }
+
+            if (!loginAccount.Role.Equals("Admin") && !loginAccount.Role.Equals("Manager"))
+            {
+                return StatusCode(403);
+            }
+            List<Order> orders;
+
+            if (!string.IsNullOrEmpty(SearchOrderId) ||
+                !string.IsNullOrEmpty(SearchDescription) ||
+                !string.IsNullOrEmpty(SearchAddress))
+            {
+                orders = await _orderService.Search(SearchOrderId, SearchDescription, SearchAddress);
             }
             else
             {
-                Order = await _orderService.GetAll();
+                orders = await _orderService.GetAll();
             }
+
+            OrderPagination = Pagination<Order>.Create(orders, PageNumber, PageSize);
 
             ViewData["searchOrderId"] = SearchOrderId;
             ViewData["searchDescription"] = SearchDescription;
             ViewData["searchAddress"] = SearchAddress;
+            return Page();
         }
     }
+
 }
