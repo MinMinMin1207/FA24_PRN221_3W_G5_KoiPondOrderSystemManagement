@@ -64,10 +64,9 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.OrderManage
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //}
             await _orderService.Create(Order);
             //_context.Add(Order);
             //await _context.SaveChangesAsync();

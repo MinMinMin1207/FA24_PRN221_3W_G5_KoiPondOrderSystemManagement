@@ -14,45 +14,64 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Order.CustomerId" class="control-label"></label>
-                <select asp-for="Order.CustomerId" class ="form-control" asp-items="ViewBag.CustomerId"></select>
+                <label class="control-label">Customer</label>
+                <select asp-for="Order.CustomerId" class ="form-control" asp-items="ViewBag.CustomerId">
+                    <option value="" selected disabled>Please select customer</option>
+
+                </select>
             </div>
             <div class="form-group">
-                <label asp-for="Order.OrderDescription" class="control-label"></label>
+                <label class="control-label">Order Description</label>
                 <input asp-for="Order.OrderDescription" class="form-control" />
                 <span asp-validation-for="Order.OrderDescription" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Order.OrderDate" class="control-label"></label>
+                <label class="control-label">Order Date</label>
                 <input asp-for="Order.OrderDate" class="form-control" />
                 <span asp-validation-for="Order.OrderDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Order.TotalCost" class="control-label"></label>
+                <label class="control-label">Total cost</label>
                 <input asp-for="Order.TotalCost" class="form-control" />
                 <span asp-validation-for="Order.TotalCost" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Order.PaymentId" class="control-label"></label>
-                <select asp-for="Order.PaymentId" class ="form-control" asp-items="ViewBag.PaymentId"></select>
+                <label class="control-label">Final cost</label>
+                <input asp-for="Order.FinalCost" class="form-control" />
+                <span asp-validation-for="Order.FinalCost" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Order.PromotionId" class="control-label"></label>
-                <select asp-for="Order.PromotionId" class ="form-control" asp-items="ViewBag.PromotionId"></select>
+                <label  class="control-label">Payment</label>
+                <select asp-for="Order.PaymentId" class ="form-control" asp-items="ViewBag.PaymentId">
+                    <option value="" selected disabled>Please choose payment</option>
+
+                </select>
             </div>
             <div class="form-group">
-                <label asp-for="Order.DeliveryAddress" class="control-label"></label>
+                <label class="control-label">Promotion</label>
+                <select asp-for="Order.PromotionId" class ="form-control" asp-items="ViewBag.PromotionId">
+                    <option value="" selected disabled>Please choose promotion</option>
+
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Delivery Address</label>
                 <input asp-for="Order.DeliveryAddress" class="form-control" />
                 <span asp-validation-for="Order.DeliveryAddress" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Order.DeliveryDate" class="control-label"></label>
+                <label class="control-label">Delivery Date</label>
                 <input asp-for="Order.DeliveryDate" class="form-control" />
                 <span asp-validation-for="Order.DeliveryDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Order.OrderStatus" class="control-label"></label>
-                <input asp-for="Order.OrderStatus" class="form-control" />
+                <label class="control-label">Order Status</label>
+                <select asp-for="Order.OrderStatus" class="form-control">
+                    <option value="" selected disabled>Change status</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Cancelled">Cancelled</option>
+                    <option value="Pending">Pending</option>
+                </select>
                 <span asp-validation-for="Order.OrderStatus" class="text-danger"></span>
             </div>
             <div class="form-group">
