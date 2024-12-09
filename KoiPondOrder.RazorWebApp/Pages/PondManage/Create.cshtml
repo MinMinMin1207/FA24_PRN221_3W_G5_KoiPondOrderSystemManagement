@@ -15,23 +15,23 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Pond.CustomerId" class="control-label"></label>
-                <input asp-for="Pond.CustomerId" class="form-control" />
+                <select asp-for="Pond.CustomerId" class="form-control" asp-items="ViewBag.Customers"></select>
                 <span asp-validation-for="Pond.CustomerId" class="text-danger"></span>
 
             </div>
             <div class="form-group">
                 <label asp-for="Pond.ConsultingStaffId" class="control-label"></label>
-                <input asp-for="Pond.ConsultingStaffId" class="form-control" />
+                <select asp-for="Pond.ConsultingStaffId" class="form-control" asp-items="ViewBag.ConsultingStaff"></select>
                 <span asp-validation-for="Pond.ConsultingStaffId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Pond.DesignStaffId" class="control-label"></label>
-                <input asp-for="Pond.DesignStaffId" class="form-control" />
+                <select asp-for="Pond.DesignStaffId" class="form-control" asp-items="ViewBag.DesignStaff"></select>
                 <span asp-validation-for="Pond.DesignStaffId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Pond.ConstructionStaffId" class="control-label"></label>
-                <input asp-for="Pond.ConstructionStaffId" class="form-control" />
+                <select asp-for="Pond.ConstructionStaffId" class="form-control" asp-items="ViewBag.ConstructionStaff"></select>
                 <span asp-validation-for="Pond.ConstructionStaffId" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -46,22 +46,22 @@
             </div>
             <div class="form-group">
                 <label asp-for="Pond.DesignId" class="control-label"></label>
-                <input asp-for="Pond.DesignId" class="form-control" />
+                <select asp-for="Pond.DesignId" class="form-control" asp-items="ViewBag.Designs"></select>
                 <span asp-validation-for="Pond.DesignId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Pond.PaymentId" class="control-label"></label>
-                <input asp-for="Pond.PaymentId" class="form-control" />
+                <select asp-for="Pond.PaymentId" class="form-control" asp-items="ViewBag.Payments"></select>
                 <span asp-validation-for="Pond.PaymentId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Pond.PromotionId" class="control-label"></label>
-                <input asp-for="Pond.PromotionId" class="form-control" />
+                <select asp-for="Pond.PromotionId" class="form-control" asp-items="ViewBag.Promotions"></select>
                 <span asp-validation-for="Pond.PromotionId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Pond.Status" class="control-label"></label>
-                <input asp-for="Pond.Status" class="form-control" />
+                <select asp-for="Pond.Status" class="form-control" asp-items="ViewBag.Statuses"></select>
                 <span asp-validation-for="Pond.Status" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -91,5 +91,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

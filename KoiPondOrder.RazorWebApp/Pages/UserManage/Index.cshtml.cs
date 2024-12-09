@@ -48,6 +48,7 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.UserManage
             {
                 listUser = await _userService.GetAll();
             }
+
             listUser = listUser.OrderByDescending(x => x.UserId).ToList();
 
             User = Pagination<User>.Create(listUser, pageIndex ?? 1, pageSize: 5);

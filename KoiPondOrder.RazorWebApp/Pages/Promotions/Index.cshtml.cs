@@ -44,6 +44,8 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.Promotions
                 PageSize
             );
 
+            var listPromotion = new List<Promotion>();
+
             if (DiscountPercentage > 100 || DiscountPercentage < 0)
             {
                 TempData["Message"] = "DiscountPercentage must be between 0 and 100.";
@@ -52,6 +54,7 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.Promotions
             Promotion = result.Promotions;
             PageIndex = result.PageIndex;
             TotalPages = result.TotalPages;
+
         }
     }
 }

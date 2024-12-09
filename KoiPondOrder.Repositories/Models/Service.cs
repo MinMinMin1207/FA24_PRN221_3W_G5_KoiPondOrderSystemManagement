@@ -29,7 +29,7 @@ public partial class Service
 
     public decimal? Cost { get; set; }
 
-    public virtual User Customer { get; set; } = null!;
+    public virtual User? Customer { get; set; } = null!;
 
     public virtual Payment? Payment { get; set; }
 

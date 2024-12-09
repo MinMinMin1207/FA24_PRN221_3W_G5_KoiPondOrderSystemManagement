@@ -63,7 +63,7 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.PondManage
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!await PondExists(Pond.PondId))
+                if (!await PondExists(Pond.PondId.Value))
                 {
                     return NotFound();
                 }

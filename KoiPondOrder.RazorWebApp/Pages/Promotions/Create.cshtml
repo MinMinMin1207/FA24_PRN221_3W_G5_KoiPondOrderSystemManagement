@@ -52,6 +52,11 @@
                 <input asp-for="Promotion.MinOrderValue" class="form-control" />
                 <span asp-validation-for="Promotion.MinOrderValue" class="text-danger"></span>
             </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Promotion.PromotionStatus" /> @Html.DisplayNameFor(model => model.Promotion.PromotionStatus)
+                </label>
+            </div>
             <div class="form-group">
                 <label asp-for="Promotion.RemainUsage" class="control-label"></label>
                 <input asp-for="Promotion.RemainUsage" class="form-control" />

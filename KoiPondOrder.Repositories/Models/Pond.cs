@@ -5,7 +5,7 @@ namespace KoiPondOrderSystemManagement.Repositories.Models;
 
 public partial class Pond
 {
-    public int PondId { get; set; }
+    public int? PondId { get; set; }
 
     public int CustomerId { get; set; }
 
@@ -35,7 +35,7 @@ public partial class Pond
 
     public virtual User? ConsultingStaff { get; set; }
 
-    public virtual User Customer { get; set; } = null!;
+    public virtual User? Customer { get; set; } = null!;
 
     public virtual Design? Design { get; set; }
 
