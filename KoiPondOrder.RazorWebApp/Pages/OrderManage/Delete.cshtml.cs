@@ -40,6 +40,18 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.OrderManage
                 return NotFound();
             }
 
+            var loginAccount = SessionHelper.GetLoginAccount(HttpContext.Session, "LoginAccount");
+
+            if (loginAccount == null)
+            {
+                return Redirect("/Login");
+            }
+
+            if (!loginAccount.Role.Equals("Admin"))
+            {
+                return StatusCode(403);
+            }
+
             //var order = await _context.Orders.FirstOrDefaultAsync(m => m.OrderId == id);
             var order = await _orderService.GetById(id);
 

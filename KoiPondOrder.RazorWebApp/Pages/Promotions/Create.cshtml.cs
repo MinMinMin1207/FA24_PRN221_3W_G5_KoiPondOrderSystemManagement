@@ -21,6 +21,17 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.Promotions
         }
         public IActionResult OnGet()
         {
+            var loginAccount = SessionHelper.GetLoginAccount(HttpContext.Session, "LoginAccount");
+
+            if (loginAccount == null)
+            {
+                return Redirect("/Login");
+            }
+
+            if (loginAccount.Role.Equals("Customer"))
+            {
+                return StatusCode(403);
+            }
             return Page();
         }
 

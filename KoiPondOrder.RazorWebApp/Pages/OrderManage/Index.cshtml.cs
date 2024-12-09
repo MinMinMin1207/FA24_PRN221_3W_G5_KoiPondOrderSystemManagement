@@ -33,11 +33,21 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.OrderManage
         [BindProperty(SupportsGet = true)]
         public int PageNumber { get; set; } = 1;
 
-        private const int PageSize = 10; 
+        private const int PageSize = 10;
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-            var loginAccount = SessionHelper.GetLoginAccount(HttpContext.Session, "LoginAccount");      
+            var loginAccount = SessionHelper.GetLoginAccount(HttpContext.Session, "LoginAccount");
+
+            if (loginAccount == null)
+            {
+                return Redirect("/Login");
+            }
+
+            if (!loginAccount.Role.Equals("Admin") && !loginAccount.Role.Equals("Manager"))
+            {
+                return StatusCode(403);
+            }
             List<Order> orders;
 
             if (!string.IsNullOrEmpty(SearchOrderId) ||
@@ -56,6 +66,7 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.OrderManage
             ViewData["searchOrderId"] = SearchOrderId;
             ViewData["searchDescription"] = SearchDescription;
             ViewData["searchAddress"] = SearchAddress;
+            return Page();
         }
     }
 

@@ -33,8 +33,19 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.Promotions
             _promotionService = promotionService;
         }
 
-        public async Task OnGetAsync(int pageIndex = 1)
+        public async Task<IActionResult> OnGetAsync(int pageIndex = 1)
         {
+            var loginAccount = SessionHelper.GetLoginAccount(HttpContext.Session, "LoginAccount");
+
+            if (loginAccount == null)
+            {
+                return Redirect("/Login");
+            }
+
+            if (!loginAccount.Role.Equals("Admin") && !loginAccount.Role.Equals("Manager"))
+            {
+                return StatusCode(403);
+            }
             // Pass filters to the service
             var result = await _promotionService.GetListPaging(
                 SearchTerm,
@@ -54,7 +65,7 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.Promotions
             Promotion = result.Promotions;
             PageIndex = result.PageIndex;
             TotalPages = result.TotalPages;
-
+            return Page();
         }
     }
 }

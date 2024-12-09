@@ -26,6 +26,17 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.Promotions
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            var loginAccount = SessionHelper.GetLoginAccount(HttpContext.Session, "LoginAccount");
+
+            if (loginAccount == null)
+            {
+                return Redirect("/Login");
+            }
+
+            if (loginAccount.Role.Equals("Customer"))
+            {
+                return StatusCode(403);
+            }
             if (id == null)
             {
                 return NotFound();
