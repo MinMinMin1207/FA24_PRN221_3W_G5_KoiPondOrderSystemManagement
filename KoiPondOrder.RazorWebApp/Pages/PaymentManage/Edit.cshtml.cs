@@ -77,6 +77,7 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.PaymentManage
 
                 await _orderPaymentService.Update(order);
                 await _paymentService.Update(Payment);
+                TempData["SuccessMessage"] = "Payment updated successfully!";
             }
             catch (DbUpdateConcurrencyException)
             {

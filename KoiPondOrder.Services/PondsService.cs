@@ -70,6 +70,14 @@ namespace KoiPondOrderSystemManagement.Services
             return await _pondsRepository.RemoveAsync(pond);
         }
 
+        public async Task<List<Pond>> GetPondListByPaymentId(int id)
+        {
+            return await _pondsRepository.GetPondListByPaymentId(id);
+        }
 
+        public async Task UpdateRange(List<Pond> pondList)
+        {
+            await _pondsRepository.UpdateRange(pondList);
+        }
     }
 }

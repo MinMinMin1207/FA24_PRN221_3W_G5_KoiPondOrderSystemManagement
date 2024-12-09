@@ -54,6 +54,7 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.PaymentManage
             await _paymentService.Create(Payment);
             order.PaymentId = Payment.PaymentId;
             await _orderPaymentService.Update(order);
+            TempData["SuccessMessage"] = "Payment created successfully!";
             return RedirectToPage("./Index");
         }
 

@@ -175,6 +175,12 @@ namespace KoiPondOrder.Repositories
             //return await _context.Set<T>().FindAsync(code);
         }
 
+        public async Task UpdateRange(List<T> values)
+        {
+            _context.UpdateRange(values);
+            await _context.SaveChangesAsync();
+        }
+
         #region Separating asigned entity and save operators        
 
         public void PrepareCreate(T entity)

@@ -14,11 +14,15 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.PaymentManage
     {
         private readonly PaymentService _paymentService;
         private readonly OrderPaymentService _orderPaymentService;
+        private readonly PondsService _pondsService;
+        private readonly ServicesService _servicesService;
 
-        public DeleteModel(PaymentService paymentService, OrderPaymentService orderPaymentService)
+        public DeleteModel(PaymentService paymentService, OrderPaymentService orderPaymentService, PondsService pondsService, ServicesService servicesService)
         {
             _paymentService = paymentService;
             _orderPaymentService = orderPaymentService;
+            _pondsService = pondsService;
+            _servicesService = servicesService;
         }
 
         [BindProperty]
@@ -69,8 +73,21 @@ namespace KoiPondOrderSystemManagement.RazorWebApp.Pages.PaymentManage
                 Payment = payment;
                 var order = await _orderPaymentService.GetById(payment.OrderId);
                 order.PaymentId = null;
+                var listPonds = await _pondsService.GetPondListByPaymentId(id.Value);
+                foreach (var item in listPonds)
+                {
+                    item.PaymentId = null;
+                }
+                var services = await _servicesService.GetAll();
+                foreach (var service in services)
+                {
+                    service.PaymentId = null;
+                }
+                await _servicesService.UpdateRange(services);
+                await _pondsService.UpdateRange(listPonds);
                 await _orderPaymentService.Update(order);
                 await _paymentService.Delete(payment);
+                TempData["SuccessMessage"] = "Payment deleted successfully!";
             }
 
             return RedirectToPage("./Index");
